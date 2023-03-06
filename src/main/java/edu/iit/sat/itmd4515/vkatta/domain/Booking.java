@@ -24,11 +24,9 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "BOOKING")
-public class Booking {
+public class Booking extends AbstractEntity {
     
-    @Column(name = "BOOKING_ID")
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long bookingId;
+    
     @Column(name = "BOOKING_TITLE")
     private String bookingTitle;
     
@@ -66,26 +64,6 @@ public class Booking {
     public Booking() {
     }
     
-
-    /**
-     * Get the value of bookingId
-     *
-     * @return the value of bookingId
-     */
-    public Long getBookingId() {
-        return bookingId;
-    }
-
-    /**
-     * Set the value of bookingId
-     *
-     * @param bookingId new value of bookingId
-     */
-    public void setBookingId(Long bookingId) {
-        this.bookingId = bookingId;
-    }
-
-
     /**
      * Get the value of bookingTitle
      *
@@ -199,13 +177,13 @@ public class Booking {
 
     @Override
     public String toString() {
-        return "Booking{" + "bookingId=" + bookingId + ", bookingTitle=" + bookingTitle + ", bookingType=" + bookingType + ", bookingDate=" + bookingDate + ", bookingDescription=" + bookingDescription + '}';
+        return "Booking{" + "bookingId=" + id + ", bookingTitle=" + bookingTitle + ", bookingType=" + bookingType + ", bookingDate=" + bookingDate + ", bookingDescription=" + bookingDescription + '}';
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 89 * hash + Objects.hashCode(this.bookingId);
+        hash = 89 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -221,10 +199,10 @@ public class Booking {
             return false;
         }
         final Booking other = (Booking) obj;
-        if ((this.bookingId == null) || (other.bookingId == null)) {
+        if ((this.id == null) || (other.id == null)) {
             return false;
         }
-        return Objects.equals(this.bookingId, other.bookingId);
+        return Objects.equals(this.id, other.id);
     }
     
 }

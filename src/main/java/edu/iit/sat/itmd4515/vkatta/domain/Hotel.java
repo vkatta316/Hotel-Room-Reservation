@@ -30,11 +30,8 @@ import java.util.Objects;
 @Entity
 @Table(name = "HOTEL")
 @NamedQuery(name = "Hotel.findByName" , query = "select hotel from Hotel hotel where hotel.hotelName = :name")
-public class Hotel {
+public class Hotel extends AbstractEntity {
     
-    @Column(name = "HOTEL_ID")
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long hotelId;
     
     @NotBlank(message="Hotel name can't be empty")
     @Size(min=2, max=16)
@@ -77,24 +74,7 @@ public class Hotel {
         this.hotelAddress = hotelAddress;
         this.dateSearch = dateSearch;
     }
-    
-    /**
-     * Get the value of hotelId
-     *
-     * @return the value of hotelId
-     */
-     public Long getHotelId() {
-        return hotelId;
-    }
-
-     /**
-     * Set the value of hotelId
-     *
-     * @param hotelId new value of hotelName
-     */
-    public void setHotelId(Long hotelId) {
-        this.hotelId = hotelId;
-    }
+  
     
     /**
      * Get the value of hotelName
@@ -211,7 +191,7 @@ public class Hotel {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 29 * hash + Objects.hashCode(this.hotelId);
+        hash = 29 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -228,15 +208,15 @@ public class Hotel {
         }
         final Hotel other = (Hotel) obj;
         
-        if ((this.hotelId == null) || (other.hotelId == null)) {
+        if ((this.id == null) || (other.id == null)) {
             return false;
         }
-        return Objects.equals(this.hotelId, other.hotelId);
+        return Objects.equals(this.id, other.id);
     }
 
     @Override
     public String toString() {
-        return "Hotel{" + "hotelId=" + hotelId + ", hotelName=" + hotelName + ", hotelType=" + hotelType + ", hotelDescription=" + hotelDescription + ", hotelAddress=" + hotelAddress + ", dateSearch=" + dateSearch + '}';
+        return "Hotel{" + "hotelId=" + id + ", hotelName=" + hotelName + ", hotelType=" + hotelType + ", hotelDescription=" + hotelDescription + ", hotelAddress=" + hotelAddress + ", dateSearch=" + dateSearch + '}';
     }
 
   

@@ -23,11 +23,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "ROOM")
 @NamedQuery(name = "Room.findByNumber" , query = "select room from Room room where room.roomNumber = :number")
-public class Room {
-    
-    @Column(name = "ROOM_ID")
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long roomId;
+public class Room extends AbstractEntity {
     
     @Column(name = "ROOM_NUMBER")
     private String roomNumber;
@@ -52,27 +48,6 @@ public class Room {
 
     public Room() {
     }
-    
-    
-
-    /**
-     * Get the value of roomId
-     *
-     * @return the value of roomId
-     */
-    public Long getRoomId() {
-        return roomId;
-    }
-
-    /**
-     * Set the value of roomId
-     *
-     * @param roomId new value of roomId
-     */
-    public void setRoomId(Long roomId) {
-        this.roomId = roomId;
-    }
-
 
     /**
      * Get the value of roomNumber
@@ -151,13 +126,13 @@ public class Room {
     
     @Override
     public String toString() {
-        return "Room{" + "roomId=" + roomId + ", roomNumber=" + roomNumber + ", roomType=" + roomType + ", roomDescription=" + roomDescription + '}';
+        return "Room{" + "roomId=" + id + ", roomNumber=" + roomNumber + ", roomType=" + roomType + ", roomDescription=" + roomDescription + '}';
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 23 * hash + Objects.hashCode(this.roomId);
+        hash = 23 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -174,10 +149,10 @@ public class Room {
         }
         
         final Room other = (Room) obj;
-        if ((this.roomId == null) || (other.roomId == null)) {
+        if ((this.id == null) || (other.id == null)) {
             return false;
         }
-        return Objects.equals(this.roomId, other.roomId);
+        return Objects.equals(this.id, other.id);
     }
 
   

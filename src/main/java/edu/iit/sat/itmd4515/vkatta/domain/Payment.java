@@ -26,11 +26,8 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "PAYMENT")
-public class Payment {
+public class Payment extends AbstractEntity {
     
-    @Column(name = "PAYMENT_ID")
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long paymentId;
     
    @Column(name = "PAYMENT_DATE")
     private LocalDate paymentDate;
@@ -60,26 +57,6 @@ public class Payment {
     
     public Payment() {
     }
-
-    
-    /**
-     * Get the value of paymentId
-     *
-     * @return the value of paymentId
-     */
-    public Long getPaymentId() {
-        return paymentId;
-    }
-
-    /**
-     * Set the value of paymentId
-     *
-     * @param paymentId new value of paymentId
-     */
-    public void setPaymentId(Long paymentId) {
-        this.paymentId = paymentId;
-    }
-    
 
     /**
      * Get the value of guest
@@ -176,13 +153,13 @@ public class Payment {
 
     @Override
     public String toString() {
-        return "Payment{" + "paymentId=" + paymentId + ", paymentDate=" + paymentDate + ", paymentAmount=" + paymentAmount + ", paymentType=" + paymentType + '}';
+        return "Payment{" + "paymentId=" + id + ", paymentDate=" + paymentDate + ", paymentAmount=" + paymentAmount + ", paymentType=" + paymentType + '}';
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 43 * hash + Objects.hashCode(this.paymentId);
+        hash = 43 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -199,10 +176,10 @@ public class Payment {
         }
         final Payment other = (Payment) obj;
         
-        if ((this.paymentId == null) || (other.paymentId == null)) {
+        if ((this.id == null) || (other.id == null)) {
             return false;
         }
-        return Objects.equals(this.paymentId, other.paymentId);
+        return Objects.equals(this.id, other.id);
     }
 
    

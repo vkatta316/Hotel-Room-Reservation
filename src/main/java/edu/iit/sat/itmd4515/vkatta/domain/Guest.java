@@ -28,11 +28,8 @@ import java.util.Objects;
 @Entity
 @Table(name = "GUEST")
 @NamedQuery(name = "Guest.findByName" , query = "select guest from Guest guest where guest.firstName = :name")
-public class Guest {
+public class Guest extends AbstractEntity {
     
-    @Column(name = "GUEST_ID")
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long guestId;
     @Column(name = "FIRST_NAME")
     private String firstName;
     @Column(name = "LAST_NAME")
@@ -69,25 +66,6 @@ public class Guest {
     public Guest() {
     }
 
-    
-    /**
-     * Get the value of guestId
-     *
-     * @return the value of guestId
-     */
-    public Long getGuestId() {
-        return guestId;
-    }
-
-    /**
-     * Set the value of guestId
-     *
-     * @param guestId new value of guestId
-     */
-    public void setGuestId(Long guestId) {
-        this.guestId = guestId;
-    }
-    
 
     /**
      * Get the value of firstName
@@ -241,13 +219,13 @@ public class Guest {
     
     @Override
     public String toString() {
-        return "Guest{" + "guestId=" + guestId + ", firstName=" + firstName + ", lastName=" + lastName + ", guestMobileNumber=" + guestMobileNumber + ", guestEmailAddress=" + guestEmailAddress + ", guestAddress=" + guestAddress + '}';
+        return "Guest{" + "guestId=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", guestMobileNumber=" + guestMobileNumber + ", guestEmailAddress=" + guestEmailAddress + ", guestAddress=" + guestAddress + '}';
     }
 
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 89 * hash + Objects.hashCode(this.guestId);
+        hash = 89 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -263,10 +241,10 @@ public class Guest {
             return false;
         }
         final Guest other = (Guest) obj;
-        if ((this.guestId == null) || (other.guestId == null)) {
+        if ((this.id == null) || (other.id == null)) {
             return false;
         }
-        return Objects.equals(this.guestId, other.guestId);
+        return Objects.equals(this.id, other.id);
     }    
 
 }
