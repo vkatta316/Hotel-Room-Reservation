@@ -66,7 +66,7 @@ public class HotelJPARelationshipTest {
         tx.commit();
         System.out.println("edu.iit.sat.itmd4515.vkatta.domain.HotelJPARelationshipTest.testOneToOneUnidirectionalHotelRoomRelationship()");
         //assertEquals(hotel.getHotelId(),room.getHotel().getHotelId());
-        assertEquals(room.getRoomId(),guest.getRoom().getRoomId());
+        assertEquals(room.getId(),guest.getRoom().getId());
         tx.begin();
         em.remove(room);
         em.remove(guest);
@@ -95,11 +95,11 @@ public class HotelJPARelationshipTest {
     
     @Test
     public void testManyToOneUnidirectionalBookingsHotelRelationship(){
-        
+                
         hotel = new Hotel("Hyatt Regency", HotelType.SUPERIOR, "Bed", "Chicago");
        
-        booking1 = new Booking("Katta's Reservation", BookingType.ONLINE, LocalDate.now(), "Test");
-        booking2 = new Booking("Katta's Reservation2", BookingType.ONLINE, LocalDate.now(), "Test2");
+        booking1 = new Booking("Katta's Reservation", BookingType.ONLINE, LocalDate.now(),LocalDate.now(), "Test");
+        booking2 = new Booking("Katta's Reservation2", BookingType.ONLINE, LocalDate.now(), LocalDate.now(),"Test2");
         
         booking1.setHotel(hotel);
         booking2.setHotel(hotel);
@@ -121,8 +121,8 @@ public class HotelJPARelationshipTest {
     @Test
     public void testOnetoManyUnidirectionalPaymentBookingsRelationship(){
         payment = new Payment(LocalDate.now(),82000L, PaymentType.ONLINE);
-        booking1 = new Booking("K's Reservation", BookingType.ONLINE, LocalDate.now(), "Test");
-        booking2 = new Booking("K's Reservation2", BookingType.ONLINE, LocalDate.now(), "Test2");
+        booking1 = new Booking("K's Reservation", BookingType.ONLINE, LocalDate.now(), LocalDate.of(2023, 04, 26), "Test");
+        booking2 = new Booking("K's Reservation2", BookingType.ONLINE, LocalDate.now(),LocalDate.now(), "Test2");
         List<Booking> bookingList = new ArrayList<>();
         bookingList.add(booking1);
         bookingList.add(booking2);
@@ -171,7 +171,7 @@ public class HotelJPARelationshipTest {
         em = emf.createEntityManager();
         tx = em.getTransaction();
         tx.begin();
-        hotel = new Hotel(hotelName, hotelType, hotelDesc, hotelAddress, LocalDate.now());
+        hotel = new Hotel(hotelName, hotelType, hotelDesc, hotelAddress);
         em.persist(hotel);
         tx.commit();
     }

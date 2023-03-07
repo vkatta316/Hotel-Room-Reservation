@@ -71,7 +71,7 @@ public class HotelJPATest {
         tx.commit();
         // find the updated record and assert
         System.out.println("Update Hotel Type: " + hotel.toString());
-        Hotel readBackFromDatabase = em.find(Hotel.class, hotel.getHotelId());
+        Hotel readBackFromDatabase = em.find(Hotel.class, hotel.getId());
         assertEquals(HotelType.LUXURY,readBackFromDatabase.getHotelType());
     }
     
@@ -80,13 +80,13 @@ public class HotelJPATest {
         // Create Test date for delete operation
         createHotelEntry("Delete Hyatt", HotelType.BUDGET, "Budget Hotel for B & B", "London" );
         System.out.println("Delete Hotel Name: " + hotel.toString());
-        assertNotNull(hotel.getHotelId());
+        assertNotNull(hotel.getId());
         // Delete the above record
         tx.begin();
         em.remove(hotel);
         tx.commit();
         
-        Hotel readBackFromDatabase = em.find(Hotel.class, hotel.getHotelId());
+        Hotel readBackFromDatabase = em.find(Hotel.class, hotel.getId());
         assertNull(readBackFromDatabase);
         
     }
@@ -95,7 +95,7 @@ public class HotelJPATest {
         em = emf.createEntityManager();
         tx = em.getTransaction();
         tx.begin();
-        hotel = new Hotel(hotelName, hotelType, hotelDesc, hotelAddress, LocalDate.now());
+        hotel = new Hotel(hotelName, hotelType, hotelDesc, hotelAddress);
         em.persist(hotel);
         tx.commit();
     }
