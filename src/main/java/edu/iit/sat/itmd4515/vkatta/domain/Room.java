@@ -23,6 +23,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "ROOM")
 @NamedQuery(name = "Room.findByNumber" , query = "select room from Room room where room.roomNumber = :number")
+@NamedQuery(name = "Room.findAll", query="select room from Room room")
 public class Room extends AbstractEntity {
     
     @Column(name = "ROOM_NUMBER")
@@ -34,9 +35,9 @@ public class Room extends AbstractEntity {
     
     
      //Uni directional between Room (owning side) and Hotel (inverse side). Many rooms at one hotel
-    @ManyToOne
-    @JoinColumn(name = "HOTEL_ID")
-    private Hotel hotel;
+   // @ManyToOne
+    //@JoinColumn(name = "HOTEL_ID")
+    //private Hotel hotel;
 
 
     public Room( String roomNumber, String roomType, String roomDescription) {
@@ -104,26 +105,7 @@ public class Room extends AbstractEntity {
     public void setRoomDescription(String roomDescription) {
         this.roomDescription = roomDescription;
     }
-    
-    /**
-     * Get the value of getHotel
-     *
-     * @return the hotel of getHotel
-     */
-    public Hotel getHotel() {
-        return hotel;
-    }
-     
-    /**
-     * Set the value of hotel
-     *
-     * @param hotel new value of hotel
-     */
-    public void setHotel(Hotel hotel) {
-        this.hotel = hotel;
-    }
-   
-    
+ 
     @Override
     public String toString() {
         return "Room{" + "roomId=" + id + ", roomNumber=" + roomNumber + ", roomType=" + roomType + ", roomDescription=" + roomDescription + '}';

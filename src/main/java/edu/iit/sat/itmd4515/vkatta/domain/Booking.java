@@ -9,11 +9,9 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -24,6 +22,8 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "BOOKING")
+@NamedQuery(name = "Booking.findByName" , query = "select booking from Booking booking where booking.bookingTitle = :name")
+@NamedQuery(name = "Booking.findAll", query="select booking from Booking booking")
 public class Booking extends AbstractEntity {
     
     
@@ -34,8 +34,11 @@ public class Booking extends AbstractEntity {
     @Enumerated(EnumType.STRING)
     private BookingType bookingType;
     
-    @Column(name = "BOOKING_DATE")
-    private LocalDate bookingDate;
+    @Column(name = "BOOKING_FROM_DATE")
+    private LocalDate bookingFromDate;
+    
+    @Column(name = "BOOKING_TO_DATE")
+    private LocalDate bookingToDate;
     
     @Column(name = "BOOKING_DESCRIPTION")
     private String bookingDescription;
@@ -54,14 +57,23 @@ public class Booking extends AbstractEntity {
    
 
 
-    public Booking(String bookingTitle, BookingType bookingType, LocalDate bookingDate, String bookingDescription) {
+    public Booking(String bookingTitle, BookingType bookingType, LocalDate bookingFromDate, LocalDate bookingToDate, String bookingDescription) {
         this.bookingTitle = bookingTitle;
         this.bookingType = bookingType;
-        this.bookingDate = bookingDate;
+        this.bookingFromDate = bookingFromDate;
+        this.bookingFromDate = bookingToDate;
         this.bookingDescription = bookingDescription;
     }
 
     public Booking() {
+    }
+    
+    //helper methods for relationships
+    
+    // Booking is going to be made by guest at hotel
+    public void makeBooking(Guest g, Hotel h, Payment p){
+        this.guest =g;
+        this.hotel=h;
     }
     
     /**
@@ -102,21 +114,39 @@ public class Booking extends AbstractEntity {
 
 
     /**
-     * Get the value of bookingDate
+     * Get the value of bookingToDate
      *
-     * @return the value of bookingDate
+     * @return the value of bookingToDate
      */
     public LocalDate getBookingDate() {
-        return bookingDate;
+        return bookingToDate;
     }
 
     /**
-     * Set the value of bookingDate
+     * Set the value of bookingToDate
      *
-     * @param bookingDate new value of bookingDate
+     * @param bookingToDate new value of bookingToDate
      */
-    public void setBookingDate(LocalDate bookingDate) {
-        this.bookingDate = bookingDate;
+    public void setBookingDate(LocalDate bookingToDate) {
+        this.bookingToDate = bookingToDate;
+    }
+    
+     /**
+     * Get the value of bookingFromDate
+     *
+     * @return the value of bookingFromDate
+     */
+    public LocalDate getFromBookingDate() {
+        return bookingFromDate;
+    }
+
+    /**
+     * Set the value of bookingFromDate
+     *
+     * @param bookingFromDate new value of bookingFromDate
+     */
+    public void setFromBookingDate(LocalDate bookingFromDate) {
+        this.bookingFromDate = bookingFromDate;
     }
     
 
@@ -177,7 +207,7 @@ public class Booking extends AbstractEntity {
 
     @Override
     public String toString() {
-        return "Booking{" + "bookingId=" + id + ", bookingTitle=" + bookingTitle + ", bookingType=" + bookingType + ", bookingDate=" + bookingDate + ", bookingDescription=" + bookingDescription + '}';
+        return "Booking{" + "bookingId=" + id + ", bookingTitle=" + bookingTitle + ", bookingType=" + bookingType + ", bookingFromDate=" + bookingFromDate + ",  bookingToDate=" + bookingToDate + ", bookingDescription=" + bookingDescription + '}';
     }
 
     @Override

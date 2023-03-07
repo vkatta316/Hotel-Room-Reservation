@@ -30,6 +30,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "HOTEL")
 @NamedQuery(name = "Hotel.findByName" , query = "select hotel from Hotel hotel where hotel.hotelName = :name")
+@NamedQuery(name = "Hotel.findAll", query="select hotel from Hotel hotel")
 public class Hotel extends AbstractEntity {
     
     
@@ -48,10 +49,7 @@ public class Hotel extends AbstractEntity {
     
     @Column(name = "HOTEL_ADDRESS")
     private String hotelAddress;
-    
-    @FutureOrPresent(message="Date can't be in the past")
-    @Column(name = "HOTEL_SEARCH_DATE")
-    private LocalDate dateSearch;
+
  
     @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
     private List<Guest> guestList = new ArrayList<>();
@@ -65,16 +63,7 @@ public class Hotel extends AbstractEntity {
         this.hotelType = hotelType;
         this.hotelDescription = hotelDescription;
         this.hotelAddress = hotelAddress;
-    }
-
-    public Hotel(String hotelName, HotelType hotelType, String hotelDescription, String hotelAddress, LocalDate dateSearch) {
-        this.hotelName = hotelName;
-        this.hotelType = hotelType;
-        this.hotelDescription = hotelDescription;
-        this.hotelAddress = hotelAddress;
-        this.dateSearch = dateSearch;
-    }
-  
+    }  
     
     /**
      * Get the value of hotelName
@@ -150,25 +139,7 @@ public class Hotel extends AbstractEntity {
     public void setHotelAddress(String hotelAddress) {
         this.hotelAddress = hotelAddress;
     }
-    
-    /**
-     * Get the value of dateSearch
-     *
-     * @return the value of dateSearch
-     */
-    public LocalDate getDateSearch() {
-        return dateSearch;
-    }
-    
-    /**
-     * Set the value of dateSearch
-     *
-     * @param dateSearch new value of dateSearch
-     */
-    public void setDateSearch(LocalDate dateSearch) {
-        this.dateSearch = dateSearch;
-    }    
-    
+  
      /**
      * Get the value of guestList
      *
@@ -216,7 +187,7 @@ public class Hotel extends AbstractEntity {
 
     @Override
     public String toString() {
-        return "Hotel{" + "hotelId=" + id + ", hotelName=" + hotelName + ", hotelType=" + hotelType + ", hotelDescription=" + hotelDescription + ", hotelAddress=" + hotelAddress + ", dateSearch=" + dateSearch + '}';
+        return "Hotel{" + "hotelId=" + id + ", hotelName=" + hotelName + ", hotelType=" + hotelType + ", hotelDescription=" + hotelDescription + ", hotelAddress=" + hotelAddress + '}';
     }
 
   

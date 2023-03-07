@@ -13,6 +13,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -26,14 +27,16 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "PAYMENT")
+@NamedQuery(name = "Payment.findByName" , query = "select payment from Payment payment where payment.paymentAmount = :name")
+@NamedQuery(name = "Payment.findAll", query="select payment from Payment payment")
 public class Payment extends AbstractEntity {
     
     
-   @Column(name = "PAYMENT_DATE")
+    @Column(name = "PAYMENT_DATE")
     private LocalDate paymentDate;
+    
     @Column(name = "PAYMENT_AMOUNT")
     private Long paymentAmount;
-    
     
     @Enumerated(EnumType.STRING)
     private PaymentType paymentType;

@@ -24,7 +24,7 @@ public class Demo {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         
-        Hotel hotel = new Hotel("Hyatt", HotelType.SUPERIOR, "Premium Hotel for B & B", "London", LocalDate.now());
+        Hotel hotel = new Hotel("Hyatt", HotelType.SUPERIOR, "Premium Hotel for B & B", "London");
         em.persist(hotel);
         
         tx.commit();

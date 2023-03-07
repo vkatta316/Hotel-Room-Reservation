@@ -6,12 +6,7 @@ package edu.iit.sat.itmd4515.vkatta.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
@@ -28,6 +23,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "GUEST")
 @NamedQuery(name = "Guest.findByName" , query = "select guest from Guest guest where guest.firstName = :name")
+@NamedQuery(name = "Guest.findAll", query="select guest from Guest guest")
 public class Guest extends AbstractEntity {
     
     @Column(name = "FIRST_NAME")
