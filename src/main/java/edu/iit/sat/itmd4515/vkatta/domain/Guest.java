@@ -51,6 +51,10 @@ public class Guest extends AbstractEntity {
     @OneToMany(mappedBy = "guest")
     private List<Booking> bookings = new ArrayList<>();
     
+    @ManyToOne
+    @JoinColumn(name = "BOOKING_ID")
+    private Booking booking;
+    
     public Guest(String firstName, String lastName, String guestMobileNumber, String guestEmailAddress, String guestAddress) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -242,5 +246,13 @@ public class Guest extends AbstractEntity {
         }
         return Objects.equals(this.id, other.id);
     }    
+
+    public Booking getBooking() {
+        return booking;
+    }
+
+    public void setBooking(Booking booking) {
+        this.booking = booking;
+    }
 
 }

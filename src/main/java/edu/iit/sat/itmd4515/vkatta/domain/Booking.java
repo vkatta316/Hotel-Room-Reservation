@@ -12,6 +12,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -43,9 +44,9 @@ public class Booking extends AbstractEntity {
     @Column(name = "BOOKING_DESCRIPTION")
     private String bookingDescription;
     
-    //Bi directional between Booking (owning side) and Guest (inverse side). A guest can have many bookings. Many
+    
     // Guests can have a booking 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "GUEST_ID")
     private Guest guest;
     
@@ -54,14 +55,17 @@ public class Booking extends AbstractEntity {
     @JoinColumn(name = "HOTEL_ID")
     private Hotel hotel;
     
-   
+    // *Must* Uni-directional One to One relationship between Booking and Payment
+    @OneToOne
+    @JoinColumn(name = "PAYMENT_ID")
+    private Payment payment;
 
 
     public Booking(String bookingTitle, BookingType bookingType, LocalDate bookingFromDate, LocalDate bookingToDate, String bookingDescription) {
         this.bookingTitle = bookingTitle;
         this.bookingType = bookingType;
         this.bookingFromDate = bookingFromDate;
-        this.bookingFromDate = bookingToDate;
+        this.bookingToDate = bookingToDate;
         this.bookingDescription = bookingDescription;
     }
 
@@ -70,12 +74,26 @@ public class Booking extends AbstractEntity {
     
     //helper methods for relationships
     
-    // Booking is going to be made by guest at hotel
+    // Guest is going to book a room at hotel and make payment
     public void makeBooking(Guest g, Hotel h, Payment p){
         this.guest =g;
         this.hotel=h;
+        this.payment =p;
+        
+        if(!g.getBookings().contains(this)){
+            g.getBookings().add(this);
+        }       
     }
     
+    // Guest is going to cancel a room at hotel and make payment
+    public void cancelBooking(Guest g, Hotel h, Payment p){
+        if(g.getBookings().contains(this)){
+            g.getBookings().remove(this);
+        }       
+        this.guest = null;
+        this.hotel= null;
+        this.payment = null;
+    }
     /**
      * Get the value of bookingTitle
      *
@@ -113,42 +131,29 @@ public class Booking extends AbstractEntity {
     }
 
 
-    /**
-     * Get the value of bookingToDate
-     *
-     * @return the value of bookingToDate
-     */
-    public LocalDate getBookingDate() {
-        return bookingToDate;
+    public Payment getPayment() {
+        return payment;
     }
 
-    /**
-     * Set the value of bookingToDate
-     *
-     * @param bookingToDate new value of bookingToDate
-     */
-    public void setBookingDate(LocalDate bookingToDate) {
-        this.bookingToDate = bookingToDate;
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
-    
-     /**
-     * Get the value of bookingFromDate
-     *
-     * @return the value of bookingFromDate
-     */
-    public LocalDate getFromBookingDate() {
+
+    public LocalDate getBookingFromDate() {
         return bookingFromDate;
     }
 
-    /**
-     * Set the value of bookingFromDate
-     *
-     * @param bookingFromDate new value of bookingFromDate
-     */
-    public void setFromBookingDate(LocalDate bookingFromDate) {
+    public void setBookingFromDate(LocalDate bookingFromDate) {
         this.bookingFromDate = bookingFromDate;
     }
-    
+
+    public LocalDate getBookingToDate() {
+        return bookingToDate;
+    }
+
+    public void setBookingToDate(LocalDate bookingToDate) {
+        this.bookingToDate = bookingToDate;
+    }
 
     /**
      * Get the value of bookingDescription
@@ -234,5 +239,7 @@ public class Booking extends AbstractEntity {
         }
         return Objects.equals(this.id, other.id);
     }
+
+   
     
 }
