@@ -28,9 +28,8 @@ label {
 .form-signin {
     display: flex;
     flex-direction: column;
-     justify-content: center;
-    
-    max-width: 300px;
+    justify-content: center;
+    max-width: 100px;
     width: 100%;
   }
   
@@ -42,13 +41,20 @@ label {
 }
 
 
-.form-control, .btn{
+.form-control{
     border-radius: 5px;
     box-sizing: border-box;
     padding: 1.0rem;
     width: 100%;
     margin-bottom: 10px;
-  }
+ }
+ 
+ .btn{
+    padding: 1rem;
+    width: 20%;
+    border-radius: 12px; 
+    border-style: solid;
+ }
   
   .checkBox{
       margin-bottom: 10px;

@@ -12,6 +12,9 @@ import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -26,12 +29,18 @@ import java.util.Objects;
 @NamedQuery(name = "Guest.findAll", query="select guest from Guest guest")
 public class Guest extends AbstractEntity {
     
+    @NotBlank(message="First name can't be empty")
+    @Size(message="First name too short/Long", min=2, max=16)
     @Column(name = "FIRST_NAME")
     private String firstName;
+    @NotBlank(message="Last name can't be empty")
+    @Size(message="Last name too short/Long" ,min=2, max=16)
     @Column(name = "LAST_NAME")
     private String lastName;
+    @Size(message="Mobile number should have minimum 10 numbers", min=10)
     @Column(name = "GUEST_MOBILE_NUMBER")
     private String guestMobileNumber;
+    @Email(message="Invalid Email Address")
     @Column(name = "GUEST_EMAIL_ADDRESS")
     private String guestEmailAddress;
     @Column(name = "GUEST_ADDRESS")

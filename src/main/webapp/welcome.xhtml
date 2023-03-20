@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title>Guest Information </title>
+        <link rel="stylesheet" href="css/staff_entry.css"/>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h1>New Guest Entry</h1>
+            
+                <h:panelGroup layout="block">
+                    <h:outputLabel for="firstName" value="First Name:" />
+                    <h:inputText class="form-control" id="firstName" p:placeholder="First Name" value="#{guestController.guest.firstName}"/>
+                    <h:messages for="firstName"/>
+                </h:panelGroup>
+                
+                <h:panelGroup layout="block">
+                    <h:outputLabel for="lastName" value="Last Name:" />
+                    <h:inputText class="form-control" id="lastName" p:placeholder="Last Name" value="#{guestController.guest.lastName}"/>
+                    <h:messages for="lastName"/>
+                </h:panelGroup>
+                
+                <h:panelGroup layout="block">
+                    <h:outputLabel for="email" value="Email:" />
+                    <h:inputText class="form-control" id="email" p:placeholder="Email" value="#{guestController.guest.guestEmailAddress}"/>
+                    <h:messages for="email"/>
+                </h:panelGroup>
+                
+                <h:panelGroup layout="block">
+                    <h:outputLabel for="address" value="Address:" />
+                    <h:inputText class="form-control" id="addressId" p:placeholder="Address" value="#{guestController.guest.guestAddress}"/>
+                    <h:messages for="address"/>
+                </h:panelGroup>
+                
+                <h:panelGroup layout="block">
+                    <h:outputLabel for="mobileNumber" value="Mobile Number:" /> 
+                    <h:inputText class="form-control" id="mobileNumber" p:placeholder="Mobile Number" value="#{guestController.guest.guestMobileNumber}"/>
+                    <h:messages for="mobileNumber"/>
+                </h:panelGroup>
+               
+                <h:panelGroup layout="block">
+                    
+                    <h:commandButton class="btn btn-primary" value="Create Guest" action="#{guestController.saveGuest()}" />
+                </h:panelGroup>
+                
+            
+        </h:form>
+    </h:body>
+</html>

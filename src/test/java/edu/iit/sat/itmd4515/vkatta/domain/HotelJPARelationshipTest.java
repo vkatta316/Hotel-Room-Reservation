@@ -54,7 +54,7 @@ public class HotelJPARelationshipTest {
     @Test
     public void testOneToOneUnidirectionalGuestRoomRelationship(){
 
-        guest = new Guest("Chowdary", "Katta", "11111111", "ck@gmail.com", "India");
+        guest = new Guest("Chowdary", "Katta", "9440263355", "ck@gmail.com", "India");
         room = new Room("123", "AC DEluxe", "Superior");
       
         guest.setRoom(room);
@@ -140,9 +140,9 @@ public class HotelJPARelationshipTest {
     
     @Test
     public void testManyToOneBiDirectionalGuestHotelRelationship(){
-        guest1 = new Guest("V", "K", "999999", "vk@gmail.com", "Guntur");
-        guest2 = new Guest("A", "K", "999999", "vk@gmail.com", "Guntur");
-        guest3 = new Guest("Ayra", "K", "999999", "vk@gmail.com", "Guntur");
+        guest1 = new Guest("Vin", "Katta", "9885952335", "vk@gmail.com", "Guntur");
+        guest2 = new Guest("Aksh", "Katta", "8978420914", "vk@gmail.com", "Guntur");
+        guest3 = new Guest("Ayra", "Katta", "6308536380", "vk@gmail.com", "Guntur");
         
         hotel = new Hotel("Hyatt Place", HotelType.SUPERIOR, "Gachibowli", "India");
         guest1.setHotel(hotel);

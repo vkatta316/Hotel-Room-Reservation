@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Confirmation Page</title>
+    </h:head>
+    <h:body>
+         <h1>You have successfully created Guest record!</h1>
+        <ul>
+            <li>#{guestController.guest.id}</li>
+            <li>#{guestController.guest.lastName}</li>
+            <li>#{guestController.guest.guestEmailAddress}</li>
+            <li>#{guestController.guest.guestAddress}</li>
+            <li>#{guestController.guest.guestMobileNumber}</li>
+            <li>#{guestController.guest.createdTimestamp}</li>
+            <li>#{guestController.guest.modifiedTimestamp}</li>
+            <li>#{guestController.guest.version}</li>
+            
+            
+        </ul>
+    </h:body>
+</html>
