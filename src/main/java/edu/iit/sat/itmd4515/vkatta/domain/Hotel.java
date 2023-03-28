@@ -4,6 +4,7 @@
  */
 package edu.iit.sat.itmd4515.vkatta.domain;
 
+import edu.iit.sat.itmd4515.vkatta.security.User;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,8 +13,10 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;  
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.FutureOrPresent;
@@ -54,6 +57,10 @@ public class Hotel extends AbstractEntity {
     @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
     private List<Guest> guestList = new ArrayList<>();
 
+    @OneToOne
+    @JoinColumn(name = "USERNAME")
+    private User user;
+    
     public Hotel(){
         
     }
@@ -189,6 +196,15 @@ public class Hotel extends AbstractEntity {
     public String toString() {
         return "Hotel{" + "hotelId=" + id + ", hotelName=" + hotelName + ", hotelType=" + hotelType + ", hotelDescription=" + hotelDescription + ", hotelAddress=" + hotelAddress + '}';
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
 
   
   

@@ -48,7 +48,7 @@ public class GuestController {
         LOG.info("Guest is created with all values after saving to database");        
         LOG.info("\t" + guest.toString());
         
-        return "confirmation.xhtml";
+        return "/customer/confirmation.xhtml";
     }
     
     public Guest getGuest() {

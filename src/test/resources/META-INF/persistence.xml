@@ -8,6 +8,8 @@
     <class>edu.iit.sat.itmd4515.vkatta.domain.Guest</class>
     <class>edu.iit.sat.itmd4515.vkatta.domain.Payment</class>
     <class>edu.iit.sat.itmd4515.vkatta.domain.Room</class>
+    <class>edu.iit.sat.itmd4515.vkatta.security.Group</class>
+    <class>edu.iit.sat.itmd4515.vkatta.security.User</class>
     
         <properties>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/itmd4515?zeroDateTimeBehavior=CONVERT_TO_NULL" />

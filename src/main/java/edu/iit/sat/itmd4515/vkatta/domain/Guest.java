@@ -4,6 +4,7 @@
  */
 package edu.iit.sat.itmd4515.vkatta.domain;
 
+import edu.iit.sat.itmd4515.vkatta.security.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -74,6 +75,10 @@ public class Guest extends AbstractEntity {
 
     public Guest() {
     }
+    
+    @OneToOne
+    @JoinColumn(name = "USERNAME")
+    private User user;
 
 
     /**
@@ -264,4 +269,13 @@ public class Guest extends AbstractEntity {
         this.booking = booking;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+  
 }

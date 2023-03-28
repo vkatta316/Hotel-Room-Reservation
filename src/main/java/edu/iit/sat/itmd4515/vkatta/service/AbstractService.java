@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author vinaychowdarykatta
  */
-abstract class AbstractService<T> {
+public abstract class AbstractService<T> {
     
      
     @PersistenceContext(name="ITMD4515PU")

@@ -1,12 +1,16 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <h:head>
-        <title>Confirmation Page</title>
-    </h:head>
-    <h:body>
-         <h1>You have successfully created Guest record!</h1>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../WEB-INF/templates/pageTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <ui:define name="title">
+        Reservation Confirmation Page
+    </ui:define>
+
+    <ui:define name="content">
+        <h1>You have successfully created Guest record!</h1>
         <ul>
             <li>#{guestController.guest.id}</li>
             <li>#{guestController.guest.lastName}</li>
@@ -16,8 +20,10 @@
             <li>#{guestController.guest.createdTimestamp}</li>
             <li>#{guestController.guest.modifiedTimestamp}</li>
             <li>#{guestController.guest.version}</li>
+            <li><h:link outcome="/welcome.xhtml">Home</h:link></li>
             
             
         </ul>
-    </h:body>
-</html>
+    </ui:define>
+
+</ui:composition>
