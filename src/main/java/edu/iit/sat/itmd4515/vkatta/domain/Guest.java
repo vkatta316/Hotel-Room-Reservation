@@ -28,6 +28,7 @@ import java.util.Objects;
 @Table(name = "GUEST")
 @NamedQuery(name = "Guest.findByName" , query = "select guest from Guest guest where guest.firstName = :name")
 @NamedQuery(name = "Guest.findAll", query="select guest from Guest guest")
+@NamedQuery(name = "Guest.findByUsername" , query = "select guest from Guest guest where guest.user.userName = :username")
 public class Guest extends AbstractEntity {
     
     @NotBlank(message="First name can't be empty")
@@ -53,7 +54,7 @@ public class Guest extends AbstractEntity {
     @JoinColumn(name = "HOTEL_ID")
     private Hotel hotel;
     
-     // *Must* Uni-directional One to One relationship between room and guest
+     // *Must* Bi-directional One to One relationship between room and guest
     @OneToOne
     @JoinColumn(name = "ROOM_ID")
     private Room room;

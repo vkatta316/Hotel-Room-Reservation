@@ -9,6 +9,7 @@ import edu.iit.sat.itmd4515.vkatta.service.GuestService;
 import jakarta.annotation.PostConstruct;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import java.util.logging.Logger;
 
@@ -25,6 +26,8 @@ public class GuestController {
     private Guest guest;
     
     @EJB GuestService guestService;
+    
+    @Inject CustomerWelcomeController cwc;
 
 
     
@@ -39,11 +42,13 @@ public class GuestController {
     
     //Action Method
     public String saveGuest(){
-        LOG.info("GuestController.savePet() -> Saving Guest Application on Click"); 
+        LOG.info("GuestController.saveGuest() -> Saving Guest Application on Click"); 
         LOG.info("Guest is created with all values");
         LOG.info("\t" + guest.toString());
         
         guestService.create(guest);
+        
+        //guestService.addRoomForCustomer(cwc.getRoom(), guest);
         
         LOG.info("Guest is created with all values after saving to database");        
         LOG.info("\t" + guest.toString());

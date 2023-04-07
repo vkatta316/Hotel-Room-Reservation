@@ -60,6 +60,11 @@ public class Booking extends AbstractEntity {
     @JoinColumn(name = "PAYMENT_ID")
     private Payment payment;
 
+    // *Must* Uni-directional One to One relationship between Booking and Room
+    @OneToOne
+    @JoinColumn(name = "ROOM_ID")
+    private Room room;
+
 
     public Booking(String bookingTitle, BookingType bookingType, LocalDate bookingFromDate, LocalDate bookingToDate, String bookingDescription) {
         this.bookingTitle = bookingTitle;
@@ -208,6 +213,24 @@ public class Booking extends AbstractEntity {
     public void setHotel(Hotel hotel) {
         this.hotel = hotel;
     }
+    
+    /**
+     * Get the value of room
+     *
+     * @return the value of room
+     */
+    public Room getRoom() {
+        return room;
+    }
+
+    /**
+     * Set the value of room
+     *
+     * @param room new value of hotel
+     */
+    public void setRoom(Room room) {
+        this.room = room;
+    }
 
 
     @Override
@@ -239,6 +262,8 @@ public class Booking extends AbstractEntity {
         }
         return Objects.equals(this.id, other.id);
     }
+
+    
 
    
     

@@ -2,30 +2,49 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                template="./WEB-INF/templates/pageTemplate.xhtml"
+                template="./WEB-INF/templates/loginTemplate.xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
-
-    <ui:define name="title">
-        Login Page
-    </ui:define>
-
+   
+    
     <ui:define name="content">
-        
-        <h:form>
-            <h:panelGroup layout="block">
-                <h:outputLabel for="userName" value="User Name:" />
-                <h:inputText class="form-control" id="userName" p:placeholder="User Name" value="#{loginController.user.userName}"/>
-                <h:messages for="userName"/>
-            </h:panelGroup>
-            <h:panelGroup layout="block">
-                <h:outputLabel for="password" value="Password:" />
-                <h:inputSecret id="password" value="#{loginController.user.password}"/>
-                <h:messages for="password"/>
-            </h:panelGroup>
-            
-            <h:commandButton value="Login" action="#{loginController.doLogin()}" />
-        </h:form>
+        <div id="main-wrapper" class="d-lg-flex half">
+            <div class="bg order-1 order-md-2" style="background-image: url(#{resource['images/HotelExterior.jpeg']});"></div>
+            <div class="contents order-2 order-md-1">
+                <div class="container">
+                    <div class="row align-items-center justify-content-center">
+                        <div class="col-md-7">
+                            <h3>Welcome back!</h3>
+                            <p class="loginNotes">Enter your email address and password for room reservation at Hyatt.</p>
+                            <h:form>
+                                <p>
+                                    <h:panelGroup layout="block" class="form-group first">
+                                        <h:outputLabel for="userName" value="User Name" />
+                                        <h:inputText
+                                            binding="#{userName}"
+                                            styleClass="#{userName.valid ? 'form-control' :'form-control is-invalid'}" id="userName" p:placeholder="User Name" value="#{loginController.user.userName}"/>
+                                        <h:messages for="userName" style = "list-style: none;"/>
+                                    </h:panelGroup>
+                                </p>
+                                
+                                    <h:panelGroup class="form-group mb-3">
+                                        <h:outputLabel for="password" value="Password" />
+                                        <h:inputSecret 
+                                            binding="#{password}"
+                                            id="password" 
+                                            styleClass="#{password.valid ? 'form-control' :'form-control is-invalid'}" p:placeholder="Password" value="#{loginController.user.password}"/>
+                                        <h:messages for="password" style = "list-style: none;"/>
+                                    </h:panelGroup>
+                                <div>
+                                    <h:commandButton class="btn btn-block btn-primary" value="Login" action="#{loginController.doLogin()}" />
+                                </div>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </ui:define>
 
 </ui:composition>

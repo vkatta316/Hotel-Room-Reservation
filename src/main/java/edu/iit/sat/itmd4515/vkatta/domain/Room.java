@@ -4,6 +4,7 @@
  */
 package edu.iit.sat.itmd4515.vkatta.domain;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,6 +33,8 @@ public class Room extends AbstractEntity {
     private String roomType;
     @Column(name = "ROOM_DESCRIPTION")
     private String roomDescription;
+    @Column(name = "ROOM_AVAILABILITY")
+    private Boolean availability = true;
     
     
      //Uni directional between Room (owning side) and Hotel (inverse side). Many rooms at one hotel
@@ -39,15 +42,25 @@ public class Room extends AbstractEntity {
     //@JoinColumn(name = "HOTEL_ID")
     //private Hotel hotel;
 
+    @OneToOne( mappedBy = "room", cascade = CascadeType.ALL)
+    @JoinColumn(name="GUEST_ID")
+    private Guest guest;
 
-    public Room( String roomNumber, String roomType, String roomDescription) {
+    public Room( String roomNumber, String roomType, String roomDescription, Boolean availability) {
         
         this.roomNumber = roomNumber;
         this.roomType = roomType;
         this.roomDescription = roomDescription;
+        this.availability = availability;
     }
 
     public Room() {
+    }
+
+    public Room(String roomNumber, String roomType, String roomDescription) {
+        this.roomNumber = roomNumber;
+        this.roomType = roomType;
+        this.roomDescription = roomDescription;
     }
 
     /**
@@ -106,10 +119,12 @@ public class Room extends AbstractEntity {
         this.roomDescription = roomDescription;
     }
  
+   
     @Override
     public String toString() {
-        return "Room{" + "roomId=" + id + ", roomNumber=" + roomNumber + ", roomType=" + roomType + ", roomDescription=" + roomDescription + '}';
+        return "Room{" + "roomNumber=" + roomNumber + ", roomType=" + roomType + ", roomDescription=" + roomDescription + ", availability=" + availability + '}';
     }
+
 
     @Override
     public int hashCode() {
@@ -135,6 +150,22 @@ public class Room extends AbstractEntity {
             return false;
         }
         return Objects.equals(this.id, other.id);
+    }
+
+    public Boolean getAvailability() {
+        return availability;
+    }
+
+    public void setAvailability(Boolean availability) {
+        this.availability = availability;
+    }
+
+    public Guest getGuest() {
+        return guest;
+    }
+
+    public void setGuest(Guest guest) {
+        this.guest = guest;
     }
 
   

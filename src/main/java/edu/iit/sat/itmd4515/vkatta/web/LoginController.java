@@ -15,8 +15,10 @@ import jakarta.security.enterprise.SecurityContext;
 import jakarta.security.enterprise.authentication.mechanism.http.AuthenticationParameters;
 import jakarta.security.enterprise.credential.Credential;
 import jakarta.security.enterprise.credential.UsernamePasswordCredential;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -44,6 +46,23 @@ public class LoginController {
         LOG.info("LoginController.postConstruct()");
         user = new User();
     }
+    
+    public String getAuthenticatedUser(){
+        // REMOTE_USER
+        return facesContext.getExternalContext().getRemoteUser();
+    }
+    
+    public boolean isAdmin(){
+        return securityContext.isCallerInRole("ADMIN_ROLE");
+    }
+    
+    public boolean isCustomer(){
+        return securityContext.isCallerInRole("CUSTOMER_ROLE");
+    }
+
+    public boolean isManager(){
+        return securityContext.isCallerInRole("MANAGER_ROLE");
+    }
 
     //action methods
     public String doLogin() {
@@ -67,11 +86,33 @@ public class LoginController {
             case SUCCESS: 
                 LOG.info(status.toString());
                 break;
+                
+            case SEND_FAILURE:
+                LOG.info(status.toString());
+                return "/error.xhtml";
+            
+            case NOT_DONE:
+                LOG.info(status.toString());
+                return "/error.xhtml";
+            
+            case SEND_CONTINUE:
+                LOG.info(status.toString());
+                break;
+                
         }
         
         return "/welcome.xhtml?faces-redirect=true";
     }
-
+    
+    public String doLogout(){
+         HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();
+        try {
+            request.logout();
+        } catch (ServletException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "/login.xhtml?faces-redirect=true";
+    }
     /**
      * Get the value of user
      *

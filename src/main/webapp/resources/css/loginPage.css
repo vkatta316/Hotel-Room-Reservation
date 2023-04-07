@@ -1,0 +1,52 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 28-Mar-2023, 7:56:22 pm
+    Author     : vinaychowdarykatta
+*/
+
+body {
+    font-family: "Roboto", sans-serif;
+    background-color: #fff;
+}
+
+h3{
+    font-family: "Roboto", sans-serif;
+}
+
+.mb-3{
+    margin-bottom: 1rem!important;
+}
+
+.loginNotes {
+    color: #b3b3b3;
+    font-weight: 300;
+}
+.half, .half .container > .row {
+    height: 100vh;
+    min-height: 700px;
+}
+
+.half .bg {
+    background-size: cover;
+    background-position: center;
+}
+
+.half .contents, .half .bg {
+    width: 50%;
+}
+
+.half .contents {
+    background: #f6f7fc;
+}
+
+.half .btn {
+    height: 3rem;
+    margin: 1rem;
+    width: 6rem;
+    background: orange;
+    border: none
+}
+

@@ -6,12 +6,16 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html">
 
     <ui:define name="title">
-        Reservation Confirmation Page
+        
     </ui:define>
 
     <ui:define name="content">
-        <h1>You have successfully created Guest record!</h1>
-        <ul>
+         <div class="header lead">
+            <h2>Reservation Confirmation Page</h2>
+            <p>You have successfully reserved room!</p>
+        </div>
+        
+        <ul style="list-style:none;">
             <li>#{guestController.guest.id}</li>
             <li>#{guestController.guest.lastName}</li>
             <li>#{guestController.guest.guestEmailAddress}</li>

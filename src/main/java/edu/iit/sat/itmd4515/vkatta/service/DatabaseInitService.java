@@ -69,6 +69,8 @@ public class DatabaseInitService {
 
         User adminUser = new User("admin", "admin", true);
         adminUser.addGroup(adminGroup);
+        adminUser.addGroup(managerGroup);
+        //adminUser.addGroup(customerGroup);
         userService.create(adminUser);
 
         User manager = new User("manager", "manager", true);
@@ -78,19 +80,19 @@ public class DatabaseInitService {
         userService.create(manager);
         userService.create(floorManager);
 
-        User customer1 = new User("customer1", "customer1", true);
+        User customer1 = new User("customer", "customer", true);
         customer1.addGroup(customerGroup);
         userService.create(customer1);
 
-        User customer2 = new User("customer2", "customer2", true);
+        User customer2 = new User("customer1", "customer1", true);
         customer2.addGroup(customerGroup);
         userService.create(customer2);
 
-        User customer3 = new User("customer3", "customer3", true);
+        User customer3 = new User("customer2", "customer2", true);
         customer3.addGroup(customerGroup);
         userService.create(customer3);
 
-        User customer4 = new User("customer4", "customer4", true);
+        User customer4 = new User("customer3", "customer3", true);
         customer4.addGroup(customerGroup);
         userService.create(customer4);
 
@@ -122,9 +124,9 @@ public class DatabaseInitService {
         guestList.add(g2);
 
         // Create Rooms
-        Room r1 = new Room("1", "Single", "Single Room");
-        Room r2 = new Room("2", "Double", "Double Room");
-        Room r3 = new Room("3", "Quad", "Quad Room");
+        Room r1 = new Room("1", "Single", "Single Room", true);
+        Room r2 = new Room("2", "Double", "Double Room", true);
+        Room r3 = new Room("3", "Quad", "Quad Room", true);
         roomService.create(r1);
         roomService.create(r2);
         roomService.create(r3);
@@ -165,7 +167,9 @@ public class DatabaseInitService {
 
         g1.setBooking(book);
         g2.setBooking(book2);
-
+        book.setRoom(r1);
+        book2.setRoom(r2);
+        
         for (Hotel h : hotelService.findAll()) {
             LOG.info(" Hotel Information ==================================");
             LOG.info(" Hotel " + h.toString());

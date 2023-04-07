@@ -5,18 +5,27 @@
                 template="./WEB-INF/templates/pageTemplate.xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html">
 
-    <ui:define name="title">
-        Hotel Reservation Main Page
-    </ui:define>
 
     <ui:define name="content">
-        Welcome to Hyatt hotel, Reserve your stay with us!!!
-        <ul>
-            <li><h:link outcome="/welcome.xhtml">Home</h:link></li>
-            <li><h:link outcome="/customer/welcome.xhtml">Customer Form</h:link></li>
-            <li><h:link outcome="/admin/welcome.xhtml">Admin Form</h:link></li>
-            <li><h:link outcome="/manager/welcome.xhtml">Manager Form</h:link></li>
-        </ul>
+        
+        <body>
+            <div class="bg-img">
+                <div class="header-container">
+                    <h1>Welcome! #{loginController.authenticatedUser}</h1>
+                    <p>You can reserve rooms online via this website.</p>
+                </div>
+            </div>
+        </body>
+
+
+        <!--        -->
+
+
+        <!--        <h:form>
+                    <ul>
+                        <li><h:commandLink action = "{loginController.doLogout()}" value="Logout" /></li>
+                    </ul>
+                </h:form>-->
     </ui:define>
 
 </ui:composition>

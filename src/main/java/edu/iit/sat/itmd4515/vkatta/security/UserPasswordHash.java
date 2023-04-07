@@ -21,6 +21,6 @@ public class UserPasswordHash {
     @PrePersist
     @PreUpdate
     private void prePersistAndUpdate(User user){
-        
+        user.setPassword(hash.generate(user.getPassword().toCharArray()));
     }
 }

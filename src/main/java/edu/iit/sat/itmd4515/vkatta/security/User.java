@@ -12,6 +12,7 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +28,9 @@ import java.util.List;
 public class User {
 
     @Id
+    @NotBlank(message ="User Name cannot be empty")
     private String userName;
+    @NotBlank(message ="Password cannot be empty")
     private String password;
     private boolean enabled;
     
