@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <h:form>
+            <input type="hidden" name="roomNumber" value="#{room.roomNumber}" />
+            <input type="hidden" name="checkInDate" value="#{availableRoomsController.checkInDate}" />
+            <input type="hidden" name="checkOutDate" value="#{availableRoomsController.checkOutDate}" />
+
+            <p>
+                <h:panelGroup layout="block" class="form-group col-md-4">
+                    <h:outputLabel for="firstName" value="First Name:" />
+                    <h:inputText class="form-control" id="Name" p:placeholder="Name" value="#{customerBookingController.guest.bookingTitle}"/>
+                    <h:messages for="firstName"/>
+                </h:panelGroup>
+            </p>
+
+            <p>
+                <h:panelGroup layout="block" class="form-group col-md-4">
+                    <h:outputLabel for="phoneNumber" value="Phone:" />
+                    <h:inputText class="form-control" id="phoneNumber" p:placeholder="Phone"  value="#{customerBookingController.guest.phone}"/>
+                    <h:messages for="phoneNumber"/>
+                </h:panelGroup>
+
+            </p>
+            <p>
+                <h:panelGroup layout="block" class="form-group col-md-4">
+                    <h:outputLabel for="email" value="Email:" />
+                    <h:inputText class="form-control" id="email" p:placeholder="Email" value="#{customerBookingController.booking.email}"/>
+                    <h:messages for="email"/>
+                </h:panelGroup>
+            </p>
+
+            <h:commandButton class="btn btn-primary" type="submit" value="Create Guest" action="#{customerBookingController.saveReservation()}" />
+
+        </h:form>
+    </cc:implementation>
+</html>

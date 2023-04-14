@@ -124,9 +124,9 @@ public class DatabaseInitService {
         guestList.add(g2);
 
         // Create Rooms
-        Room r1 = new Room("1", "Single", "Single Room", true);
-        Room r2 = new Room("2", "Double", "Double Room", true);
-        Room r3 = new Room("3", "Quad", "Quad Room", true);
+        Room r1 = new Room("1", "Single", "Single Room", 250.00, 2);
+        Room r2 = new Room("2", "Double", "Double Room", 200.00, 3);
+        Room r3 = new Room("3", "Quad", "Quad Room", 300.00, 4);
         roomService.create(r1);
         roomService.create(r2);
         roomService.create(r3);
@@ -134,14 +134,18 @@ public class DatabaseInitService {
         // Set room id to guest
         g1.setRoom(r1);
         g2.setRoom(r2);
+        
+        r1.setGuest(g1);
+        r2.setGuest(g2);
+        r3.setGuest(g4);
 
         // Add all guests list to Hotel
         h1.setGuestList(guestList);
 
         // Create bookings for guest
-        Booking b1 = new Booking("On Vinay Katta", BookingType.ONLINE, LocalDate.now(), LocalDate.of(2023, 04, 26), "Booking For Vinay Katta");
-        Booking b2 = new Booking("On Ayra Katta", BookingType.ONLINE, LocalDate.now(), LocalDate.of(2023, 04, 26), "");
-        Booking b3 = new Booking("On Ayansh Katta", BookingType.ONLINE, LocalDate.now(), LocalDate.of(2023, 04, 26), "");
+        Booking b1 = new Booking("On Vinay Katta", LocalDate.now(), LocalDate.of(2023, 04, 26), "Booking For Vinay Katta");
+        Booking b2 = new Booking("On Ayra Katta", LocalDate.now(), LocalDate.of(2023, 04, 26), "");
+        Booking b3 = new Booking("On Ayansh Katta", LocalDate.now(), LocalDate.of(2023, 04, 26), "");
         //bookingService.create(b1);
 
         Payment p1 = new Payment(LocalDate.now(), 3000L, PaymentType.ONLINE);
@@ -154,11 +158,11 @@ public class DatabaseInitService {
         p1.setGuest(g1);
         p2.setGuest(g2);
 
-        Booking book = new Booking("VK Booking", BookingType.ONLINE, LocalDate.now(),
+        Booking book = new Booking("VK Booking", LocalDate.now(),
                 LocalDate.of(2023, 6, 26), "Customer make this booking online");
         book.makeBooking(g1, h1, p1);
 
-        Booking book2 = new Booking("AK Booking", BookingType.ONLINE, LocalDate.of(2023, 6, 26),
+        Booking book2 = new Booking("AK Booking", LocalDate.of(2023, 6, 26),
                 LocalDate.of(2023, 9, 26), "Customer make this booking at desk");
         book2.makeBooking(g2, h1, p2);
 

@@ -11,13 +11,13 @@
     </ui:define>
 
     <ui:define name="content">
-        
+
         <h:link outcome="./createCustomer.xhtml">Customer form</h:link>        
-        
-         <h:dataTable 
-             styleClass= "table table-hover table-striped" 
-             value="#{customerWelcomeController.guest.room}" 
-             var="room" >
+
+        <h:dataTable 
+            styleClass= "table table-hover table-striped" 
+            value="#{customerWelcomeController.guest.room}" 
+            var="room" >
             <h:column>
                 <f:facet name="header" >
                     Room Number
@@ -26,8 +26,8 @@
                     value = "#{room.roomNumber}" >
                 </h:outputText>
             </h:column>
-            
-             <h:column>
+
+            <h:column>
                 <f:facet name="header" >
                     Room Type
                 </f:facet>
@@ -35,8 +35,8 @@
                     value = "#{room.roomType}" >
                 </h:outputText>
             </h:column>
-            
-             <h:column>
+
+            <h:column>
                 <f:facet name="header" >
                     Room Description
                 </f:facet>
@@ -44,18 +44,17 @@
                     value = "#{room.roomDescription}" >
                 </h:outputText>
             </h:column>
-            
+
             <h:column>
-                <f:facet name="header" >
-                    Availability
-                </f:facet>
-                <h:outputText
-                    value = "#{room.availability}" >
-                </h:outputText>
+                <f:facet name="header">Guest Name</f:facet>
+                <h:outputText value="#{room.guest.firstName} " />
+
+                <ui:repeat value="#{room.guest}" var="owner">
+                    <h:outputText value="#{guest.firstName}" />
+                </ui:repeat>
             </h:column>
-            
         </h:dataTable>
-        
+
     </ui:define>
 
 </ui:composition>

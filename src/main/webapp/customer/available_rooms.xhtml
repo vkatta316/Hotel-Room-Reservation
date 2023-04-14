@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../WEB-INF/templates/pageTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:define name="title">
+        Welcome!!!
+    </ui:define>
+
+    <ui:define name="content">
+        <div class="header">
+            <h1>Available Rooms</h1>
+            <p>from <span>#{availableRoomsController.checkInDate}</span> to <span>#{availableRoomsController.checkOutDate}</span></p>
+        </div>
+        <div class="container" style="margin-bottom: 50px">
+            <h:form>
+                <c:forEach var="room" items="#{availableRoomsController.availableRooms}">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-header">
+                            Room #{room.roomNumber}
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Room for #{room.personsAllowed} Adults</h5>
+                            <p class="card-text">#{room.roomDescription}</p>
+                            <p class="card-text">#{room.price} $</p>
+                                <input type="hidden" name="roomNumber" value="#{room.roomNumber}" />
+                                <input type="hidden" name="price" value="#{room.price}" />
+                                <input type="hidden" name="checkInDate" value="#{availableRoomsController.checkInDate}" />
+                                <input type="hidden" name="checkOutDate" value="#{availableRoomsController.checkOutDate}" />
+                                <h:commandButton class="btn btn-success" value="Book" action="#{bookAvailableRoomController.doGet()}" />
+                        </div>
+                    </div>
+                </c:forEach>
+            </h:form>
+        </div>
+    </ui:define>
+
+
+</ui:composition>

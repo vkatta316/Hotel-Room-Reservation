@@ -35,19 +35,4 @@ public class GuestService extends AbstractService<Guest> {
                 .getSingleResult();
     }
 
-    public void addRoomForCustomer(Room room, Guest customer) {
-        //
-        em.persist(customer);
-        room = new Room("4", "Single", "Single Room", true);
-        roomService.create(room);
-        customer.setRoom(room);
-        Room managedRoomRef = em.getReference(Room.class, room.getId());
-        managedRoomRef.setGuest(customer);
-        em.merge(managedRoomRef);
-
-        //Booking managedBookingRef = em.getReference(Booking.class, book.getId());
-        //managedBookingRef.setRoom(room);
-        //em.merge(managedBookingRef);
-
-    }
 }

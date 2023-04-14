@@ -98,8 +98,8 @@ public class HotelJPARelationshipTest {
                 
         hotel = new Hotel("Hyatt Regency", HotelType.SUPERIOR, "Bed", "Chicago");
        
-        booking1 = new Booking("Katta's Reservation", BookingType.ONLINE, LocalDate.now(),LocalDate.now(), "Test");
-        booking2 = new Booking("Katta's Reservation2", BookingType.ONLINE, LocalDate.now(), LocalDate.now(),"Test2");
+        booking1 = new Booking("Katta's Reservation", LocalDate.now(),LocalDate.now(), "Test");
+        booking2 = new Booking("Katta's Reservation2", LocalDate.now(), LocalDate.now(),"Test2");
         
         booking1.setHotel(hotel);
         booking2.setHotel(hotel);
@@ -121,8 +121,8 @@ public class HotelJPARelationshipTest {
     @Test
     public void testOnetoManyUnidirectionalPaymentBookingsRelationship(){
         payment = new Payment(LocalDate.now(),82000L, PaymentType.ONLINE);
-        booking1 = new Booking("K's Reservation", BookingType.ONLINE, LocalDate.now(), LocalDate.of(2023, 04, 26), "Test");
-        booking2 = new Booking("K's Reservation2", BookingType.ONLINE, LocalDate.now(),LocalDate.now(), "Test2");
+        booking1 = new Booking("K's Reservation", LocalDate.now(), LocalDate.of(2023, 04, 26), "Test");
+        booking2 = new Booking("K's Reservation2", LocalDate.now(),LocalDate.now(), "Test2");
         List<Booking> bookingList = new ArrayList<>();
         bookingList.add(booking1);
         bookingList.add(booking2);

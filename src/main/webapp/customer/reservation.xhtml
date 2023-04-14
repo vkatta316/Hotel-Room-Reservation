@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../WEB-INF/templates/pageTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:define name="title">
+        Welcome!!!
+    </ui:define>
+
+    <ui:define name="content">
+           
+        <div class="header lead">
+            <h1>Final Reservation</h1>
+            <p>Please, fill the form for complete the reservation process.</p>
+        </div>
+        
+        <div class="container">
+            <div class="alert alert-info">
+                <strong>Room Number:</strong> #{bookAvailableRoomController.roomNumber}
+            </div>
+            <div class="alert alert-info">
+                <Strong>From: </Strong><span id='checkInDate'>#{bookAvailableRoomController.checkInDate}</span><br/>
+                <Strong>To: </Strong><span id='checkOutDate'>#{bookAvailableRoomController.checkOutDate}</span><br/>
+                <Strong>Number of days: </Strong><span id='dayNumbers'>#{bookAvailableRoomController.numberOfDays}</span><br/>
+                <strong>Price for one night: </strong><span id='price'>#{bookAvailableRoomController.price} $ </span><br/>
+                <strong>Total price: </strong> <span id='totalPrice'>#{bookAvailableRoomController.totalPrice} $</span>
+            </div>
+            <h:form>
+               
+                
+                <input type="hidden" name="roomId" value="#{bookAvailableRoomController.roomNumber}" />
+                <label class="check-lbl">Full Name</label>
+                <input class="form-control" id="bookingTitle" name="bookingTitle"/>
+                <label class="check-lbl">Check-In date</label>
+                <input class="form-control" id="bookingFromDate" name="checkInDate" value="#{bookAvailableRoomController.checkInDate}"/>
+                <label class="check-lbl">Check-Out date</label>
+                <input class="form-control" id="bookingFromDate" name="checkOutDate" value="#{bookAvailableRoomController.checkOutDate}"/>
+                <label class="check-lbl">Comments</label>
+                <input class="form-control" id="bookingDescription" name="bookingDescription" /> 
+                <label class="check-lbl">Email</label>
+                <input class="form-control" id="email" name="email"/>
+                <label class="check-lbl">Phone</label>
+                <input class="form-control" id="phone" name="phone"/>
+                                                                                 
+                <h:commandButton class="btn btn-primary"  value="Reserve Room" action="#{customerBookingController.doPost()}" />
+                
+            </h:form>
+        </div>
+    </ui:define>
+
+
+</ui:composition>

@@ -11,10 +11,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Size;
 import java.util.Objects;
 
 /**
@@ -31,10 +33,14 @@ public class Room extends AbstractEntity {
     private String roomNumber;
     @Column(name = "ROOM_TYPE")
     private String roomType;
+    @Lob
+    @Size(max = 65535)
     @Column(name = "ROOM_DESCRIPTION")
     private String roomDescription;
-    @Column(name = "ROOM_AVAILABILITY")
-    private Boolean availability = true;
+    @Column(name = "PRICE")
+    private Double price;
+    @Column(name = "PERSONS_ALLOWED")
+    private Integer personsAllowed;
     
     
      //Uni directional between Room (owning side) and Hotel (inverse side). Many rooms at one hotel
@@ -46,14 +52,6 @@ public class Room extends AbstractEntity {
     @JoinColumn(name="GUEST_ID")
     private Guest guest;
 
-    public Room( String roomNumber, String roomType, String roomDescription, Boolean availability) {
-        
-        this.roomNumber = roomNumber;
-        this.roomType = roomType;
-        this.roomDescription = roomDescription;
-        this.availability = availability;
-    }
-
     public Room() {
     }
 
@@ -61,6 +59,15 @@ public class Room extends AbstractEntity {
         this.roomNumber = roomNumber;
         this.roomType = roomType;
         this.roomDescription = roomDescription;
+    }
+
+    public Room(String roomNumber, String roomType, String roomDescription, Double price, Integer personsAllowed) {
+        this.roomNumber = roomNumber;
+        this.roomType = roomType;
+        this.roomDescription = roomDescription;
+        this.price = price;
+        this.personsAllowed = personsAllowed;
+        
     }
 
     /**
@@ -119,12 +126,6 @@ public class Room extends AbstractEntity {
         this.roomDescription = roomDescription;
     }
  
-   
-    @Override
-    public String toString() {
-        return "Room{" + "roomNumber=" + roomNumber + ", roomType=" + roomType + ", roomDescription=" + roomDescription + ", availability=" + availability + '}';
-    }
-
 
     @Override
     public int hashCode() {
@@ -152,14 +153,6 @@ public class Room extends AbstractEntity {
         return Objects.equals(this.id, other.id);
     }
 
-    public Boolean getAvailability() {
-        return availability;
-    }
-
-    public void setAvailability(Boolean availability) {
-        this.availability = availability;
-    }
-
     public Guest getGuest() {
         return guest;
     }
@@ -168,6 +161,27 @@ public class Room extends AbstractEntity {
         this.guest = guest;
     }
 
-  
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public Integer getPersonsAllowed() {
+        return personsAllowed;
+    }
+
+    public void setPersonsAllowed(Integer personsAllowed) {
+        this.personsAllowed = personsAllowed;
+    }
+
+    @Override
+    public String toString() {
+        return "Room{" + "roomNumber=" + roomNumber + ", roomType=" + roomType + ", roomDescription=" + roomDescription + ", price=" + price + ", personsAllowed=" + personsAllowed + '}';
+    }
+
+    
 
 }

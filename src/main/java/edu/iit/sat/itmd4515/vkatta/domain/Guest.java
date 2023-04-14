@@ -66,6 +66,8 @@ public class Guest extends AbstractEntity {
     @JoinColumn(name = "BOOKING_ID")
     private Booking booking;
     
+    
+    
     public Guest(String firstName, String lastName, String guestMobileNumber, String guestEmailAddress, String guestAddress) {
         this.firstName = firstName;
         this.lastName = lastName;

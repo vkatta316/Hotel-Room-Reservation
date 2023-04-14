@@ -14,6 +14,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -28,21 +29,25 @@ import java.util.Objects;
 public class Booking extends AbstractEntity {
     
     
-    @Column(name = "BOOKING_TITLE")
+    @Column(name = "CUSTOMER_NAME")
     private String bookingTitle;
-    
-    @Column(name = "BOOKING_TYPE")
-    @Enumerated(EnumType.STRING)
-    private BookingType bookingType;
-    
-    @Column(name = "BOOKING_FROM_DATE")
+     
+    @Column(name = "CHECK_IN_DATE")
     private LocalDate bookingFromDate;
     
-    @Column(name = "BOOKING_TO_DATE")
+    @Column(name = "CHECK_OUT_DATE")
     private LocalDate bookingToDate;
     
     @Column(name = "BOOKING_DESCRIPTION")
     private String bookingDescription;
+    
+    @Size(max = 25)
+    @Column(name = "EMAIL")
+    private String email;
+     
+    @Size(max = 20)
+    @Column(name = "PHONE")
+    private String phone;
     
     
     // Guests can have a booking 
@@ -66,15 +71,23 @@ public class Booking extends AbstractEntity {
     private Room room;
 
 
-    public Booking(String bookingTitle, BookingType bookingType, LocalDate bookingFromDate, LocalDate bookingToDate, String bookingDescription) {
+    public Booking(String bookingTitle, LocalDate bookingFromDate, LocalDate bookingToDate, String bookingDescription) {
         this.bookingTitle = bookingTitle;
-        this.bookingType = bookingType;
         this.bookingFromDate = bookingFromDate;
         this.bookingToDate = bookingToDate;
         this.bookingDescription = bookingDescription;
     }
 
     public Booking() {
+    }
+
+    public Booking(String bookingTitle, LocalDate bookingFromDate, LocalDate bookingToDate, String bookingDescription, String email, String phone) {
+        this.bookingTitle = bookingTitle;
+        this.bookingFromDate = bookingFromDate;
+        this.bookingToDate = bookingToDate;
+        this.bookingDescription = bookingDescription;
+        this.email = email;
+        this.phone = phone;
     }
     
     //helper methods for relationships
@@ -115,24 +128,6 @@ public class Booking extends AbstractEntity {
      */
     public void setBookingTitle(String bookingTitle) {
         this.bookingTitle = bookingTitle;
-    }
-
-    /**
-     * Get the value of bookingType
-     *
-     * @return the value of bookingType
-     */
-    public BookingType getBookingType() {
-        return bookingType;
-    }
-
-    /**
-     * Set the value of bookingType
-     *
-     * @param bookingType new value of bookingType
-     */
-    public void setBookingType(BookingType bookingType) {
-        this.bookingType = bookingType;
     }
 
 
@@ -234,11 +229,6 @@ public class Booking extends AbstractEntity {
 
 
     @Override
-    public String toString() {
-        return "Booking{" + "bookingId=" + id + ", bookingTitle=" + bookingTitle + ", bookingType=" + bookingType + ", bookingFromDate=" + bookingFromDate + ",  bookingToDate=" + bookingToDate + ", bookingDescription=" + bookingDescription + '}';
-    }
-
-    @Override
     public int hashCode() {
         int hash = 7;
         hash = 89 * hash + Objects.hashCode(this.id);
@@ -263,7 +253,26 @@ public class Booking extends AbstractEntity {
         return Objects.equals(this.id, other.id);
     }
 
-    
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    @Override
+    public String toString() {
+        return "Booking{" + "bookingTitle=" + bookingTitle + ", bookingFromDate=" + bookingFromDate + ", bookingToDate=" + bookingToDate + ", bookingDescription=" + bookingDescription + ", email=" + email + ", phone=" + phone + '}';
+    }
 
    
     

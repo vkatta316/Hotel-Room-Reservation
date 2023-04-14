@@ -28,17 +28,13 @@ public class RoomService extends AbstractService<Room>{
         return super.findAll("Room.findAll");
     }
     
-    public void addRoomForCustomer(Room room, Guest customer, Booking book){
+    public void addRoomForCustomer(Room room, Guest customer){
         //
         em.persist(room);
         
         Guest managedCustomerRef = em.getReference(Guest.class,customer.getId());
         managedCustomerRef.setRoom(room);
         em.merge(managedCustomerRef);
-        
-        Booking managedBookingRef = em.getReference(Booking.class,book.getId());
-        managedBookingRef.setRoom(room);
-        em.merge(managedBookingRef);
         
     }
     
