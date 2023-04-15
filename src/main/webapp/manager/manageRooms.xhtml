@@ -8,20 +8,13 @@
                 xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
 
     <ui:define name="title">
-        Manager - Manage Rooms
+        Manager - Create Rooms
     </ui:define>
 
     <ui:define name="content">
         <div class="container">
             <h:form>
-                <p>
-                    <h:panelGroup layout="block" class="form-group col-md-4">
-                        <h:outputLabel for="roomNumber" value="Room Number:" />
-                        <h:inputText class="form-control" id="roomNumber" p:placeholder="Room Number" value="#{roomController.room.roomNumber}"/>
-                        <h:messages for="roomNumber"/>
-                    </h:panelGroup>
-                </p>
-
+               
                 <p>
                     <h:panelGroup layout="block" class="form-group col-md-4">
                         <h:outputLabel for="roomType" value="Room Type:" />
@@ -35,11 +28,28 @@
                     </h:panelGroup>
 
                 </p>
+                
                 <p>
                     <h:panelGroup layout="block" class="form-group col-md-4">
                         <h:outputLabel for="roomDescription" value="Room Description: " />
                         <h:inputText class="form-control" id="roomDescription" p:placeholder="Room Description" value="#{roomController.room.roomDescription}"/>
                         <h:messages for="roomDescription"/>
+                    </h:panelGroup>
+                </p>
+                
+                 <p>
+                    <h:panelGroup layout="block" class="form-group col-md-4">
+                        <h:outputLabel for="price" value="Price" />
+                        <h:inputText class="form-control" id="price" p:placeholder="price" value="#{roomController.room.price}"/>
+                        <h:messages for="price"/>
+                    </h:panelGroup>
+                </p>
+                
+                 <p>
+                    <h:panelGroup layout="block" class="form-group col-md-4">
+                        <h:outputLabel for="personsAllowed" value="Persons Allowed" />
+                        <h:inputText class="form-control" id="personsAllowed" p:placeholder="Persons Allowed" value="#{roomController.room.personsAllowed}"/>
+                        <h:messages for="personsAllowed"/>
                     </h:panelGroup>
                 </p>
 

@@ -13,13 +13,14 @@
     <ui:define name="content">
         Admin Content Area
         
+        
         <h:dataTable styleClass= "table table-hover table-striped" value="#{roomService.findAll()}" var="room" >
             <h:column>
                 <f:facet name="header" >
                     Room Number
                 </f:facet>
                 <h:outputText
-                    value = "#{room.roomNumber}" >
+                    value = "#{room.id}" >
                 </h:outputText>
             </h:column>
             
@@ -43,19 +44,37 @@
             
             <h:column>
                 <f:facet name="header" >
-                    Availability
+                    Price
                 </f:facet>
                 <h:outputText
-                    value = "#{room.availability}" >
+                    value = "#{room.price}" >
+                </h:outputText>
+            </h:column>
+            
+            <h:column>
+                <f:facet name="header" >
+                    Persons Allowed
+                </f:facet>
+                <h:outputText
+                    value = "#{room.personsAllowed}" >
                 </h:outputText>
             </h:column>
             
             <h:column>
                 <f:facet name="header">Guest Name</f:facet>
-                <h:outputText value="#{room.guest.firstName} " />
+                
 
-                <ui:repeat value="#{room.guest}" var="owner">
+                <ui:repeat value="#{room.guests}" var="guest">
                     <h:outputText value="#{guest.firstName}" />
+                </ui:repeat>
+            </h:column>
+            
+            <h:column>
+                <f:facet name="header">Booking Name</f:facet>
+                
+
+                <ui:repeat value="#{room.bookings}" var="booking">
+                    <h:outputText value="#{booking.bookingTitle}" />
                 </ui:repeat>
             </h:column>
         </h:dataTable>

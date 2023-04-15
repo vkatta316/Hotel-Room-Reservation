@@ -11,18 +11,17 @@
 
     <ui:define name="content">
          <div class="header lead">
-            <h2>Reservation Confirmation Page</h2>
-            <p>You have successfully reserved room!</p>
+            <h2>Room Creation Page</h2>
+            <p>You have successfully added room!</p>
         </div>
         
         <ul style="list-style:none;">
-            <li>#{customerBookingController.booking.id}</li>
-            <li>#{customerBookingController.booking.bookingTitle}</li>
-            <li>#{customerBookingController.booking.bookingFromDate}</li>
-            <li>#{customerBookingController.booking.bookingToDate}</li>
-            <li>#{customerBookingController.booking.bookingDescription}</li>
-            <li>#{customerBookingController.booking.email}</li>
-            <li>#{customerBookingController.booking.phone}</li>
+            <li>#{roomController.room.id}</li>
+            <li>#{roomController.room.roomType}</li>
+            <li>#{roomController.room.roomDescription}</li>
+            <li>#{roomController.room.price}</li>
+            <li>#{roomController.room.personsAllowed}</li>
+            
             <li><h:link outcome="/welcome.xhtml">Home</h:link></li>
             
             

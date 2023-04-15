@@ -33,3 +33,11 @@ body {
 .form-group{
     width: 50%;
 }
+
+.no-records{
+    color: #cc0033;
+    display: none;
+    font-size: 12px;
+    line-height: 15px;
+    margin: 5px 0 0;
+}

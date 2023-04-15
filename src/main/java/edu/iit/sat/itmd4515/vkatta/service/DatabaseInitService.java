@@ -124,20 +124,16 @@ public class DatabaseInitService {
         guestList.add(g2);
 
         // Create Rooms
-        Room r1 = new Room("1", "Single", "Single Room", 250.00, 2);
-        Room r2 = new Room("2", "Double", "Double Room", 200.00, 3);
-        Room r3 = new Room("3", "Quad", "Quad Room", 300.00, 4);
+        Room r1 = new Room("Single", "Single Room", 250.00, 2);
+        Room r2 = new Room("Double", "Double Room", 200.00, 3);
+        Room r3 = new Room("Quad", "Quad Room", 300.00, 4);
         roomService.create(r1);
         roomService.create(r2);
         roomService.create(r3);
 
         // Set room id to guest
-        g1.setRoom(r1);
-        g2.setRoom(r2);
-        
-        r1.setGuest(g1);
-        r2.setGuest(g2);
-        r3.setGuest(g4);
+        g1.addRoom(r1);
+        g2.addRoom(r2);
 
         // Add all guests list to Hotel
         h1.setGuestList(guestList);
@@ -157,22 +153,6 @@ public class DatabaseInitService {
         // Add Guest Id to Payment
         p1.setGuest(g1);
         p2.setGuest(g2);
-
-        Booking book = new Booking("VK Booking", LocalDate.now(),
-                LocalDate.of(2023, 6, 26), "Customer make this booking online");
-        book.makeBooking(g1, h1, p1);
-
-        Booking book2 = new Booking("AK Booking", LocalDate.of(2023, 6, 26),
-                LocalDate.of(2023, 9, 26), "Customer make this booking at desk");
-        book2.makeBooking(g2, h1, p2);
-
-        bookingService.create(book);
-        bookingService.create(book2);
-
-        g1.setBooking(book);
-        g2.setBooking(book2);
-        book.setRoom(r1);
-        book2.setRoom(r2);
         
         for (Hotel h : hotelService.findAll()) {
             LOG.info(" Hotel Information ==================================");
@@ -180,10 +160,7 @@ public class DatabaseInitService {
             LOG.info(" Guests in the Hotel  ==================================");
             for (Guest g : h.getGuestList()) {
                 LOG.info("\t \t" + g.toString());
-                LOG.info("\t \t" + g.getBooking().toString());
-
             }
-
         }
 
         for (Guest guest : guestService.findAll()) {
@@ -192,9 +169,8 @@ public class DatabaseInitService {
             LOG.info(" Guest Hotel Booking ==================================");
             for (Booking b : guest.getBookings()) {
                 LOG.info("\t \t" + b.getHotel().toString());
-                LOG.info("\t \t" + b.getGuest().toString());
+                LOG.info("\t \t" + b.getGuests().toString());
                 LOG.info("\t \t" + b.getPayment().toString());
-                LOG.info("\t \t" + guest.getBooking().toString());
             }
         }
 
@@ -202,7 +178,7 @@ public class DatabaseInitService {
             LOG.info("Payment information for Bookings ==================================");
             LOG.info("Booking Information for " + b.getId() + " " + b.toString());
             LOG.info(" \t \t Payment for the booking : " + b.getId() + " " + b.getPayment().toString());
-            LOG.info(" \t \t Guest of this booking " + b.getId() + " " + b.getGuest().toString());
+            LOG.info(" \t \t Guest of this booking " + b.getId() + " " + b.getGuests().toString());
         }
 
         for (Payment p : paymentService.findAll()) {

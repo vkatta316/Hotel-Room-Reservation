@@ -77,63 +77,6 @@ public class CustomerWelcomeController {
         this.guest = guest;
     }
     
-    //action methods
-    public String doGet() {
-        HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();
-        
-        HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
-       
-        checkInDate = request.getParameter("checkInDate");
-        checkOutDate = request.getParameter("checkOutDate");
-        
-        availableRooms = roomService.findAll();
-        
-        System.out.println("edu.iit.sat.itmd4515.vkatta.web.CustomerWelcomeController.doGet()" + availableRooms.size());
-        reservation = bookingService.findAll();
-         System.out.println("edu.iit.sat.itmd4515.vkatta.web.CustomerWelcomeController.doGet()" + reservation.size());
-        
-        for (int i = 0; i < reservation.size(); i++) {
-            if (
-                    (isDateAfterThan(checkInDate, reservation.get(i).getBookingFromDate().toString()) && 
-                    isDateAfterThan(reservation.get(i).getBookingToDate().toString(), checkOutDate))
-                    ||
-                    (isDateAfterThan(reservation.get(i).getBookingFromDate().toString(), checkInDate) && 
-                    isDateAfterThan(checkOutDate, reservation.get(i).getBookingToDate().toString()))
-                    ||
-                    (isDateAfterThan(checkInDate, reservation.get(i).getBookingFromDate().toString()) && 
-                    isDateAfterThan(checkOutDate, reservation.get(i).getBookingToDate().toString()))
-                    ||
-                    (isDateAfterThan(reservation.get(i).getBookingFromDate().toString(), checkInDate) && 
-                    isDateAfterThan(reservation.get(i).getBookingToDate().toString(), checkOutDate))
-                ) {
-                for(int j = 0; j < availableRooms.size(); j++) {
-                    LOG.info("AAAA" + reservation.get(i).getRoom().getRoomNumber().toString());
-                    LOG.info("VVVV" + availableRooms.get(j).getId().toString());
-                    if(reservation.get(i).getRoom().toString().equals( availableRooms.get(j).getId().toString())) {
-                        availableRooms.remove(j);
-                        break;
-                    }
-                }
-            }
-        }
-        LOG.info("edu.iit.sat.itmd4515.vkatta.web.CustomerWelcomeController.doGet() VK" + availableRooms);
-        return "/customer/available_rooms.xhtml";
-    }
-    
-    
-    //helper methods
-    private boolean isDateAfterThan(String firstDate, String secondDate) {
-
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Date date1 = sdf.parse(firstDate);
-            Date date2 = sdf.parse(secondDate);
-            return date1.compareTo(date2) > 0;
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
 
     public Room getRoom() {
         return room;

@@ -10,12 +10,16 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -50,10 +54,10 @@ public class Booking extends AbstractEntity {
     private String phone;
     
     
-    // Guests can have a booking 
-    @OneToOne
-    @JoinColumn(name = "GUEST_ID")
-    private Guest guest;
+    
+    @ManyToMany(mappedBy = "bookings")
+    private List<Guest> guests = new ArrayList<>();
+
     
     // *Must* Uni directional between Booking (owning side) and Hotel (inverse side). Many bookings at one hotel
     @ManyToOne(cascade = CascadeType.ALL)
@@ -65,11 +69,33 @@ public class Booking extends AbstractEntity {
     @JoinColumn(name = "PAYMENT_ID")
     private Payment payment;
 
-    // *Must* Uni-directional One to One relationship between Booking and Room
-    @OneToOne
-    @JoinColumn(name = "ROOM_ID")
-    private Room room;
+    
+      // *Must* Bi-directional One to One relationship between room and guest
+    // bi-directional ManyToMany relationship between Owner (owning side) and Pet (inverse side)
+    @ManyToMany
+    @JoinTable(name = "BOOKINGS_ROOMS",
+            joinColumns = @JoinColumn(name = "BOOKING_ID"),
+            inverseJoinColumns = @JoinColumn(name = "ROOM_ID"))
+    private List<Room> rooms = new ArrayList<>();
+    
+ // relationship helper methods
+    public void addRoom(Room room) {
+        if (!this.rooms.contains(room)) {
+            this.rooms.add(room);
+        }
+        if (!room.getBookings().contains(this)) {
+            room.getBookings().add(this);
+        }
+    }
 
+    public void removeRoom(Room room) {
+        if (this.rooms.contains(room)) {
+            this.rooms.remove(room);
+        }
+        if (room.getBookings().contains(this)) {
+            room.getBookings().remove(this);
+        }
+    }
 
     public Booking(String bookingTitle, LocalDate bookingFromDate, LocalDate bookingToDate, String bookingDescription) {
         this.bookingTitle = bookingTitle;
@@ -91,27 +117,7 @@ public class Booking extends AbstractEntity {
     }
     
     //helper methods for relationships
-    
-    // Guest is going to book a room at hotel and make payment
-    public void makeBooking(Guest g, Hotel h, Payment p){
-        this.guest =g;
-        this.hotel=h;
-        this.payment =p;
-        
-        if(!g.getBookings().contains(this)){
-            g.getBookings().add(this);
-        }       
-    }
-    
-    // Guest is going to cancel a room at hotel and make payment
-    public void cancelBooking(Guest g, Hotel h, Payment p){
-        if(g.getBookings().contains(this)){
-            g.getBookings().remove(this);
-        }       
-        this.guest = null;
-        this.hotel= null;
-        this.payment = null;
-    }
+   
     /**
      * Get the value of bookingTitle
      *
@@ -174,24 +180,6 @@ public class Booking extends AbstractEntity {
     }
     
      /**
-     * Get the value of guest
-     *
-     * @return the value of guest
-     */
-    public Guest getGuest() {
-        return guest;
-    }
-
-    /**
-     * Set the value of guest
-     *
-     * @param guest new value of guest
-     */
-    public void setGuest(Guest guest) {
-        this.guest = guest;
-    }
-
-     /**
      * Get the value of hotel
      *
      * @return the value of hotel
@@ -208,25 +196,6 @@ public class Booking extends AbstractEntity {
     public void setHotel(Hotel hotel) {
         this.hotel = hotel;
     }
-    
-    /**
-     * Get the value of room
-     *
-     * @return the value of room
-     */
-    public Room getRoom() {
-        return room;
-    }
-
-    /**
-     * Set the value of room
-     *
-     * @param room new value of hotel
-     */
-    public void setRoom(Room room) {
-        this.room = room;
-    }
-
 
     @Override
     public int hashCode() {
@@ -272,6 +241,22 @@ public class Booking extends AbstractEntity {
     @Override
     public String toString() {
         return "Booking{" + "bookingTitle=" + bookingTitle + ", bookingFromDate=" + bookingFromDate + ", bookingToDate=" + bookingToDate + ", bookingDescription=" + bookingDescription + ", email=" + email + ", phone=" + phone + '}';
+    }
+
+    public List<Guest> getGuests() {
+        return guests;
+    }
+
+    public void setGuests(List<Guest> guests) {
+        this.guests = guests;
+    }
+
+    public List<Room> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(List<Room> rooms) {
+        this.rooms = rooms;
     }
 
    

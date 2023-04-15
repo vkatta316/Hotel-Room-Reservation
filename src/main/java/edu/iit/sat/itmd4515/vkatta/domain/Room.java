@@ -12,11 +12,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -25,13 +28,11 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "ROOM")
-@NamedQuery(name = "Room.findByNumber" , query = "select room from Room room where room.roomNumber = :number")
+@NamedQuery(name = "Room.findById" , query = "select room from Room room where room.id = :id")
 @NamedQuery(name = "Room.findAll", query="select room from Room room")
 public class Room extends AbstractEntity {
     
-    @Column(name = "ROOM_NUMBER")
-    private String roomNumber;
-    @Column(name = "ROOM_TYPE")
+   @Column(name = "ROOM_TYPE")
     private String roomType;
     @Lob
     @Size(max = 65535)
@@ -48,44 +49,26 @@ public class Room extends AbstractEntity {
     //@JoinColumn(name = "HOTEL_ID")
     //private Hotel hotel;
 
-    @OneToOne( mappedBy = "room", cascade = CascadeType.ALL)
-    @JoinColumn(name="GUEST_ID")
-    private Guest guest;
+    @ManyToMany(mappedBy = "rooms")
+    private List<Guest> guests = new ArrayList<>();
+    
+    @ManyToMany(mappedBy = "rooms")
+    private List<Booking> bookings = new ArrayList<>();
 
     public Room() {
     }
 
-    public Room(String roomNumber, String roomType, String roomDescription) {
-        this.roomNumber = roomNumber;
+    public Room(String roomType, String roomDescription) {
         this.roomType = roomType;
         this.roomDescription = roomDescription;
     }
 
-    public Room(String roomNumber, String roomType, String roomDescription, Double price, Integer personsAllowed) {
-        this.roomNumber = roomNumber;
+    public Room(String roomType, String roomDescription, Double price, Integer personsAllowed) {
         this.roomType = roomType;
         this.roomDescription = roomDescription;
         this.price = price;
         this.personsAllowed = personsAllowed;
         
-    }
-
-    /**
-     * Get the value of roomNumber
-     *
-     * @return the value of roomNumber
-     */
-    public String getRoomNumber() {
-        return roomNumber;
-    }
-
-    /**
-     * Set the value of roomNumber
-     *
-     * @param roomNumber new value of roomNumber
-     */
-    public void setRoomNumber(String roomNumber) {
-        this.roomNumber = roomNumber;
     }
 
 
@@ -153,13 +136,6 @@ public class Room extends AbstractEntity {
         return Objects.equals(this.id, other.id);
     }
 
-    public Guest getGuest() {
-        return guest;
-    }
-
-    public void setGuest(Guest guest) {
-        this.guest = guest;
-    }
 
     public Double getPrice() {
         return price;
@@ -177,9 +153,25 @@ public class Room extends AbstractEntity {
         this.personsAllowed = personsAllowed;
     }
 
+    public List<Guest> getGuests() {
+        return guests;
+    }
+
+    public void setGuests(List<Guest> guests) {
+        this.guests = guests;
+    }
+
+    public List<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(List<Booking> bookings) {
+        this.bookings = bookings;
+    }
+
     @Override
     public String toString() {
-        return "Room{" + "roomNumber=" + roomNumber + ", roomType=" + roomType + ", roomDescription=" + roomDescription + ", price=" + price + ", personsAllowed=" + personsAllowed + '}';
+        return "Room{" + "roomType=" + roomType + ", roomDescription=" + roomDescription + ", price=" + price + ", personsAllowed=" + personsAllowed + '}';
     }
 
     

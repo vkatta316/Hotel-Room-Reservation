@@ -17,25 +17,26 @@
             <p>from <span>#{availableRoomsController.checkInDate}</span> to <span>#{availableRoomsController.checkOutDate}</span></p>
         </div>
         <div class="container" style="margin-bottom: 50px">
-            <h:form>
-                <c:forEach var="room" items="#{availableRoomsController.availableRooms}">
+            <c:forEach var="room" items="#{availableRoomsController.availableRooms}">
+                <h:form>
+
                     <div class="card" style="width: 18rem;">
                         <div class="card-header">
-                            Room #{room.roomNumber}
+                            Room #{room.id}
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">Room for #{room.personsAllowed} Adults</h5>
                             <p class="card-text">#{room.roomDescription}</p>
                             <p class="card-text">#{room.price} $</p>
-                                <input type="hidden" name="roomNumber" value="#{room.roomNumber}" />
-                                <input type="hidden" name="price" value="#{room.price}" />
-                                <input type="hidden" name="checkInDate" value="#{availableRoomsController.checkInDate}" />
-                                <input type="hidden" name="checkOutDate" value="#{availableRoomsController.checkOutDate}" />
-                                <h:commandButton class="btn btn-success" value="Book" action="#{bookAvailableRoomController.doGet()}" />
+                            <input type="hidden" name="roomNumber" value="#{room.id}" />
+                            <input type="hidden" name="price" value="#{room.price}" />
+                            <input type="hidden" name="checkInDate" value="#{availableRoomsController.checkInDate}" />
+                            <input type="hidden" name="checkOutDate" value="#{availableRoomsController.checkOutDate}" />
+                            <h:commandButton class="btn btn-success" value="Book" action="#{bookAvailableRoomController.doGet()}" />
                         </div>
                     </div>
-                </c:forEach>
-            </h:form>
+                </h:form>
+            </c:forEach>
         </div>
     </ui:define>
 

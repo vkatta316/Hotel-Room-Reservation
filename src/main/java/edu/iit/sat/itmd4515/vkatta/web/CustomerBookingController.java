@@ -89,7 +89,7 @@ public class CustomerBookingController implements Serializable{
         this.guest = guest;
     }
    
-    public String doPost() {
+    public String saveBooking() {
          HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();
 
         HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
@@ -98,7 +98,7 @@ public class CustomerBookingController implements Serializable{
         
         LOG.info("Guest Id" + guest.getId());
         
-        int roomNumber = Integer.parseInt(request.getParameter("roomId"));
+        long roomNumber =Long.parseLong(request.getParameter("roomId"));
         LOG.info("Room Id" + roomNumber);
         checkInDate = LocalDate.parse(request.getParameter("checkInDate"));
         LOG.info("checkInDate" +checkInDate);
@@ -111,8 +111,14 @@ public class CustomerBookingController implements Serializable{
         
         
         booking = new Booking(bookingTitle, checkInDate, checkOutDate, bookingDescription, email, phone);
-        bookingService.create(booking);
-        //bookingService.addBookingForCustomer(booking, guest);
+        guestService.createBookingForGuest(booking, guest);
+        
+        room = roomService.findById(roomNumber);
+        LOG.info("ROOM UPdate" +room);
+        guestService.createRoomForGuest(room, guest);
+        
+
+        bookingService.addRoomForBooking(room, booking);
         
         //guestService.addRoomForCustomer(cwc.getRoom(), guest);
         

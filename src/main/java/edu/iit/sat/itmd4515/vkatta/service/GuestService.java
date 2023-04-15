@@ -34,5 +34,32 @@ public class GuestService extends AbstractService<Guest> {
                 .setParameter("username", userName)
                 .getSingleResult();
     }
+    
+    public void createRoomForGuest(Room room, Guest customer){
+        // all that is happening in the default create method:        
+        //em.persist(room);
+        Guest managedGuestRef = em.getReference(Guest.class, customer.getId());
+        managedGuestRef.addRoom(room);
+        em.merge(managedGuestRef);        
+    }
+    
+     public void createBookingForGuest(Booking booking, Guest customer){
+        // all that is happening in the default create method:        
+        em.persist(booking);
+        Guest managedGuestRef = em.getReference(Guest.class, customer.getId());
+        managedGuestRef.addBooking(booking);
+        em.merge(managedGuestRef);        
+    }
+    
+     
+     public void updateRoomForGuest(Room room){
+        Room managedRoomReference = em.getReference(Room.class, room.getId());
+        managedRoomReference.setId(room.getId());
+        managedRoomReference.setRoomType(room.getRoomType());
+        managedRoomReference.setPrice(room.getPrice());
+        managedRoomReference.setPersonsAllowed(room.getPersonsAllowed());
+        managedRoomReference.setRoomDescription(room.getRoomDescription());
+        em.merge(managedRoomReference);
+    }
 
 }

@@ -3,15 +3,80 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 template="./../WEB-INF/templates/pageTemplate.xhtml"
-                xmlns:h="http://xmlns.jcp.org/jsf/html">
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="title">
-        Manager Page
+         
     </ui:define>
 
     <ui:define name="content">
-        Manager content area
-        <h:link outcome="/welcome.xhtml">Home</h:link>
+        Manage Rooms
+
+        <h:dataTable styleClass= "table table-hover table-striped" value="#{roomService.findAll()}" var="room" >
+            <h:column>
+                <f:facet name="header" >
+                    Room Number
+                </f:facet>
+                <h:outputText
+                    value = "#{room.id}" >
+                </h:outputText>
+            </h:column>
+            
+             <h:column>
+                <f:facet name="header" >
+                    Room Type
+                </f:facet>
+                <h:outputText
+                    value = "#{room.roomType}" >
+                </h:outputText>
+            </h:column>
+            
+             <h:column>
+                <f:facet name="header" >
+                    Room Description
+                </f:facet>
+                <h:outputText
+                    value = "#{room.roomDescription}" >
+                </h:outputText>
+            </h:column>
+            
+            <h:column>
+                <f:facet name="header" >
+                    Price
+                </f:facet>
+                <h:outputText
+                    value = "#{room.price}" >
+                </h:outputText>
+            </h:column>
+            
+            <h:column>
+                <f:facet name="header" >
+                    Persons Allowed
+                </f:facet>
+                <h:outputText
+                    value = "#{room.personsAllowed}" >
+                </h:outputText>
+            </h:column>
+            
+            <h:column>
+                <f:facet name="header">Guest Name</f:facet>
+                <h:outputText value="#{room.guests.size()}:" />
+
+                <ui:repeat value="#{room.guests}" var="guest">
+                    <h:outputText value="#{guest.firstName}" />
+                </ui:repeat>
+            </h:column>
+            
+            <h:column>
+                <f:facet name="header">Booking Name</f:facet>
+                <h:outputText value="#{room.bookings.size()}: "/>
+
+                <ui:repeat value="#{room.bookings}" var="booking">
+                    <h:outputText value="#{booking.bookingTitle}" />
+                </ui:repeat>
+            </h:column>
+        </h:dataTable>
     </ui:define>
 
 </ui:composition>

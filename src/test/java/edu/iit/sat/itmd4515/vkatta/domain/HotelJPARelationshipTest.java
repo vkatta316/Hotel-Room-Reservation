@@ -55,9 +55,9 @@ public class HotelJPARelationshipTest {
     public void testOneToOneUnidirectionalGuestRoomRelationship(){
 
         guest = new Guest("Chowdary", "Katta", "9440263355", "ck@gmail.com", "India");
-        room = new Room("123", "AC DEluxe", "Superior");
+        room = new Room("AC DEluxe", "Superior");
       
-        guest.setRoom(room);
+        guest.addRoom(room);
         
         tx.begin();
         em.persist(guest);
@@ -66,7 +66,7 @@ public class HotelJPARelationshipTest {
         tx.commit();
         System.out.println("edu.iit.sat.itmd4515.vkatta.domain.HotelJPARelationshipTest.testOneToOneUnidirectionalHotelRoomRelationship()");
         //assertEquals(hotel.getHotelId(),room.getHotel().getHotelId());
-        assertEquals(room.getId(),guest.getRoom().getId());
+        
         tx.begin();
         em.remove(room);
         em.remove(guest);

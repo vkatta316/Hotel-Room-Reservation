@@ -4,6 +4,7 @@
  */
 package edu.iit.sat.itmd4515.vkatta.service;
 
+import edu.iit.sat.itmd4515.vkatta.domain.Room;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import java.util.ArrayList;
@@ -50,4 +51,14 @@ public abstract class AbstractService<T> {
         return entities;
     }
     
+    protected T findById(Long id){
+        
+        T entity;
+        entity = em.createNamedQuery("Room.findById", entityClass)
+                .setParameter("id", id)
+                .getSingleResult();
+        return entity;
+    }
+    
+   
 }

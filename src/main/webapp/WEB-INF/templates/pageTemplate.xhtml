@@ -38,7 +38,7 @@
                             </li>
                         </ui:fragment>
                         
-                        <ui:fragment rendered= "#{loginController.customer}" >
+                        <ui:fragment rendered= "#{loginController.customer}" >w
                              <li class="nav-item">
                                 <h:link 
                                     styleClass="#{fn:startsWith(view.viewId, '/customer') ? 'nav-link active' :'nav-link'}" 
@@ -49,8 +49,8 @@
                             <li class="nav-item">
                                 <h:link 
                                     styleClass="#{fn:startsWith(view.viewId, '/customer') ? 'nav-link active' :'nav-link'}" 
-                                    outcome="/customer/welcome.xhtml">
-                                    Customer Form
+                                    outcome="/customer/myReservations.xhtml">
+                                    My Reservations
                                 </h:link>
                             </li>
                         </ui:fragment>
@@ -60,12 +60,12 @@
                                 <h:link 
                                     styleClass="#{fn:startsWith(view.viewId, '/manager') ? 'nav-link active' :'nav-link'}" 
                                     outcome="/manager/manageRooms.xhtml">
-                                    Manage Rooms
+                                    Create Rooms
                                 </h:link>
                             </li>
                             <li class="nav-item">
                                 <h:link styleClass="#{fn:startsWith(view.viewId, '/manager') ? 'nav-link active' :'nav-link'}" 
-                                        outcome="/manager/welcome.xhtml">Manager Form</h:link>
+                                        outcome="/manager/welcome.xhtml">Manage Rooms</h:link>
                             </li>
                         </ui:fragment>
                     </ul>

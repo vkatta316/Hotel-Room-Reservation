@@ -8,6 +8,8 @@ import edu.iit.sat.itmd4515.vkatta.security.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
@@ -55,18 +57,60 @@ public class Guest extends AbstractEntity {
     private Hotel hotel;
     
      // *Must* Bi-directional One to One relationship between room and guest
-    @OneToOne
-    @JoinColumn(name = "ROOM_ID")
-    private Room room;
+    // bi-directional ManyToMany relationship between Owner (owning side) and Pet (inverse side)
+    @ManyToMany
+    @JoinTable(name = "GUESTS_ROOMS",
+            joinColumns = @JoinColumn(name = "GUEST_ID"),
+            inverseJoinColumns = @JoinColumn(name = "ROOM_ID"))
+    private List<Room> rooms = new ArrayList<>();
     
-    @OneToMany(mappedBy = "guest")
+    @ManyToMany
+    @JoinTable(name = "GUESTS_BOOKINGS",
+            joinColumns = @JoinColumn(name = "GUEST_ID"),
+            inverseJoinColumns = @JoinColumn(name = "BOOKING_ID"))
     private List<Booking> bookings = new ArrayList<>();
+    
     
     @ManyToOne
     @JoinColumn(name = "BOOKING_ID")
     private Booking booking;
     
+    // relationship helper methods
+    public void addRoom(Room room) {
+        if (!this.rooms.contains(room)) {
+            this.rooms.add(room);
+        }
+        if (!room.getGuests().contains(this)) {
+            room.getGuests().add(this);
+        }
+    }
+
+    public void removeRoom(Room room) {
+        if (this.rooms.contains(room)) {
+            this.rooms.remove(room);
+        }
+        if (room.getGuests().contains(this)) {
+            room.getGuests().remove(this);
+        }
+    }
     
+     public void addBooking(Booking booking) {
+        if (!this.bookings.contains(booking)) {
+            this.bookings.add(booking);
+        }
+        if (!booking.getGuests().contains(this)) {
+            booking.getGuests().add(this);
+        }
+    }
+
+    public void removeBooking(Booking booking) {
+        if (this.bookings.contains(booking)) {
+            this.bookings.remove(booking);
+        }
+        if (booking.getGuests().contains(this)) {
+            booking.getGuests().remove(this);
+        }
+    }
     
     public Guest(String firstName, String lastName, String guestMobileNumber, String guestEmailAddress, String guestAddress) {
         this.firstName = firstName;
@@ -214,25 +258,6 @@ public class Guest extends AbstractEntity {
         this.bookings = bookings;
     }
     
-     
-    /**
-     * Get the value of getGuest
-     *
-     * @return the guest of getGuest
-     */
-    public Room getRoom() {
-        return room;
-    }
-    
-    /**
-     * Set the value of guest
-     *
-     * @param room new value of guest
-     */
-    public void setRoom(Room room) {
-        this.room = room;
-    }
-   
     
     @Override
     public String toString() {
@@ -278,6 +303,14 @@ public class Guest extends AbstractEntity {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<Room> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(List<Room> rooms) {
+        this.rooms = rooms;
     }
 
   

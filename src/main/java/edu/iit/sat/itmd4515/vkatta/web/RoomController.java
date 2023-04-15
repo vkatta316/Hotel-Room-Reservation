@@ -57,7 +57,7 @@ public class RoomController {
         LOG.info("Room is created with all values after saving to database");        
         LOG.info("\t" + room.toString());
         
-        return "/customer/confirmation.xhtml";
+        return "/manager/confirmation.xhtml";
     }
     
      // helper method

@@ -7,54 +7,64 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="title">
-        Welcome!!!
+        My Reservations and Room Details
     </ui:define>
 
     <ui:define name="content">
-
-        <h:link outcome="./createCustomer.xhtml">Customer form</h:link>        
-
-        <h:dataTable 
+        
+        <h:dataTable
             styleClass= "table table-hover table-striped" 
-            value="#{customerWelcomeController.guest.room}" 
-            var="room" >
+            value="#{customerWelcomeController.guest.bookings}" 
+            var="booking" >
             <h:column>
                 <f:facet name="header" >
-                    Room Number
+                    Booking Title
                 </f:facet>
                 <h:outputText
-                    value = "#{room.roomNumber}" >
+                    value = "Room Reserved for #{booking.bookingTitle}" >
                 </h:outputText>
             </h:column>
 
             <h:column>
                 <f:facet name="header" >
-                    Room Type
+                    Check In
                 </f:facet>
                 <h:outputText
-                    value = "#{room.roomType}" >
+                    value = "#{booking.bookingFromDate}" >
                 </h:outputText>
             </h:column>
 
             <h:column>
                 <f:facet name="header" >
-                    Room Description
+                    Check Out
                 </f:facet>
                 <h:outputText
-                    value = "#{room.roomDescription}" >
+                    value = "#{booking.bookingToDate}" >
                 </h:outputText>
             </h:column>
 
             <h:column>
                 <f:facet name="header">Guest Name</f:facet>
-                <h:outputText value="#{room.guest.firstName} " />
+                <h:outputText value="#{booking.guests.size()} Guest " />
 
-                <ui:repeat value="#{room.guest}" var="owner">
+                <ui:repeat value="#{booking.guests}" var="guest">
                     <h:outputText value="#{guest.firstName}" />
+                    
                 </ui:repeat>
             </h:column>
+            <h:column>
+                <f:facet name="header">Room Number</f:facet>
+                <ui:repeat value="#{booking.rooms}" var="room">
+                    <h:outputText value="#{room.id}" />
+                    
+                </ui:repeat>
+            </h:column>
+           
         </h:dataTable>
-
+        
+         <h:outputText 
+                value="No Reservations Made Yet!!!" rendered="#{empty customerWelcomeController.guest.bookings}" 
+            />
     </ui:define>
 
 </ui:composition>
