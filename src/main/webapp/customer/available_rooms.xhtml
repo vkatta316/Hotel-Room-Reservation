@@ -16,9 +16,9 @@
             <h1>Available Rooms</h1>
             <p>from <span>#{availableRoomsController.checkInDate}</span> to <span>#{availableRoomsController.checkOutDate}</span></p>
         </div>
-        <div class="container" style="margin-bottom: 50px">
+        <div class="container-fluid">
             <c:forEach var="room" items="#{availableRoomsController.availableRooms}">
-                <h:form>
+                <h:form class="rooms">
 
                     <div class="card" style="width: 18rem;">
                         <div class="card-header">

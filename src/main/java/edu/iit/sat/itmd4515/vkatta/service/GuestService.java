@@ -42,6 +42,7 @@ public class GuestService extends AbstractService<Guest> {
         managedGuestRef.addRoom(room);
         em.merge(managedGuestRef);        
     }
+ 
     
      public void createBookingForGuest(Booking booking, Guest customer){
         // all that is happening in the default create method:        

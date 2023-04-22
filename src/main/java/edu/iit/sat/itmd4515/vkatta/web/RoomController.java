@@ -29,6 +29,7 @@ public class RoomController {
     private Room room;
     
     @EJB RoomService roomService;
+    @EJB GuestService guestService;
     
     @Inject CustomerWelcomeController cwc;
 
@@ -43,13 +44,37 @@ public class RoomController {
         room = new Room();
     }
     
+    public String displayReadRoomPage(Room room){
+        LOG.info("Inside displayReadRoomPage " + room.toString() );
+        LOG.info("Inside displayReadRoomPage ROOM TYPE" + room.getRoomType().toString() );
+        this.room = room;
+        return "/manager/readRoom.xhtml";
+    }
+    
+    public String displayUpdateRoomPage(Room room){
+        LOG.info("Inside displayUpdateRoomPage " + room.toString() );
+        this.room = room;
+        return "/manager/updateRoom.xhtml";  
+    }
+    
+    public String displayDeleteRoomPage(Room room){
+        LOG.info("Inside displayDeleteRoomPage " + room.toString() );
+        this.room = room;
+        return "/manager/deleteRoom.xhtml";
+    }
+    
     //Action Method
     public String saveRoom(){
-        LOG.info("GuestController.saveGuest() -> Saving Guest Application on Click"); 
-        LOG.info("Guest is created with all values");
+        LOG.info("RoomController.saveRoom() -> Saving Room Application on Click"); 
+        LOG.info("Room is created with all values");
         LOG.info("\t" + room.toString());
         
         roomService.create(room);
+        
+
+        //guestService.createRoomForGuest(room, cwc.getGuest());
+
+        //cwc.refreshOnwer();
         
         //roomService.addRoomForCustomer(room, cwc.getGuest());
         //guestService.addRoomForCustomer(cwc.getRoom(), guest);
@@ -58,6 +83,21 @@ public class RoomController {
         LOG.info("\t" + room.toString());
         
         return "/manager/confirmation.xhtml";
+    }
+    
+    public String updateRoom(){
+        LOG.info("Inside updateRoom " + room.toString() );
+        
+        guestService.updateRoomForGuest(room);
+        
+        return "/manager/welcome.xhtml";
+        
+    }
+
+    public String deleteRoom(){
+        LOG.info("Inside deleteRoom " + room.toString() );
+        return "/manager/welcome.xhtml";
+        
     }
     
      // helper method

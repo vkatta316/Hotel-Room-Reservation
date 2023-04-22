@@ -69,7 +69,12 @@ public class CustomerWelcomeController {
         LOG.info("\t" + guest.toString());
     }
     
-     
+     // helper method
+    public void refreshOnwer() {
+        guest = guestService.findGuestByUsername(loginController.getAuthenticatedUser());
+    }
+
+    
     public Guest getGuest() {
         return guest;
     }

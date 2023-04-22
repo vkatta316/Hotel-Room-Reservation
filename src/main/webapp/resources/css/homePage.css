@@ -13,7 +13,6 @@ body {
 }
 
 .header-container {
-   
     line-spacing: 10px;
 }
 
@@ -40,4 +39,19 @@ body {
     font-size: 12px;
     line-height: 15px;
     margin: 5px 0 0;
+}
+
+.welcomeImg{
+    background-size: cover;
+    background-position: center;
+}
+
+.container-fluid{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.card{
+   margin: 1rem;
 }
