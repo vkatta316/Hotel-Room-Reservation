@@ -67,18 +67,31 @@ public class CustomerBookingController implements Serializable{
     
     @Inject LoginController loginController;
     
+    @Inject CustomerWelcomeController cwc;
+    
     @Inject
     FacesContext facesContext;
     
     @PostConstruct
-    private void postContruct(){
+    private void postContruct(){        
         
         LOG.info("CustomerBookingController.postConstruct() with " + loginController.getAuthenticatedUser());
         guest = guestService.findGuestByUsername(loginController.getAuthenticatedUser());
-        
         LOG.info("\t" + guest.toString());
+        booking = new Booking();
         
-        
+    }
+    
+     // helper method
+    /**
+     *
+     */
+    public void refreshGuest() {
+        guest = guestService.findGuestByUsername(loginController.getAuthenticatedUser());
+    }
+    
+    public List<Booking> refreshBooking() {
+        return bookingService.findAll();
     }
     
      
@@ -127,6 +140,48 @@ public class CustomerBookingController implements Serializable{
         
         return "/customer/confirmation.xhtml";
         
+    }
+    
+    /**
+     *
+     */
+    public void initBookingById(){
+        LOG.info("initBookingById before init " + this.booking.toString());
+        this.booking = bookingService.read(booking.getId());        
+        LOG.info("initBookingById after init " + this.booking.toString());
+    }
+    
+     /**
+     *
+     */
+    public void modifyBookingById(){
+        LOG.info("initBookingById before init " + this.booking.toString());
+        this.booking = bookingService.read(booking.getId());        
+        LOG.info("initBookingById after init " + this.booking.toString());
+        executeCancelButtonClick();
+    }
+   
+   
+     /**
+     *
+     * @return
+     */
+    public String executeModfyButtonClick(){
+        LOG.info("OwnerApptController.executeModfyButtonClick " + this.booking.toString());
+        bookingService.modifyAppointment(booking);
+        return "/customer/myReservations.xhtml?faces-redirect=true";
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String executeCancelButtonClick(){
+        LOG.info("CustomerBookingController.executeCancelButtonClick " + this.booking.toString());
+        //LOG.info("CustomerBookingController.executeCancelButtonClick " + this.room.toString());
+        guestService.removeBookingForGuest(booking, guest);
+        bookingService.cancelBooking(booking, guest);
+        return "/customer/myReservations.xhtml";
     }
 
     public Room getRoom() {

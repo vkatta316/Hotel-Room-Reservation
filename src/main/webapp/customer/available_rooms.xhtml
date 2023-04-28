@@ -37,6 +37,9 @@
                     </div>
                 </h:form>
             </c:forEach>
+            <h:outputText 
+                value="No Rooms available!!!" rendered="#{empty availableRoomsController.availableRooms}" 
+            />
         </div>
     </ui:define>
 

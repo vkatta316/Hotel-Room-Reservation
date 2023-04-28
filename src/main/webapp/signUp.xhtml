@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./WEB-INF/templates/loginTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+   
+    
+    <ui:define name="content">
+        <div id="main-wrapper" class="d-lg-flex half">
+            <div class="bg order-1 order-md-2" style="background-image: url(#{resource['images/HotelExterior.jpeg']});"></div>
+            <div class="contents order-2 order-md-1">
+                <div class="container">
+                    <div class="row align-items-center justify-content-center">
+                        <div class="col-md-7">
+                            <h3>Welcome back!</h3>
+                            <p class="loginNotes">Enter your email address and password for room reservation at Hyatt.</p>
+                            <h:form>
+                                <p>
+                                    <h:panelGroup layout="block" class="form-group first">
+                                        <h:outputLabel for="firstName" value="First Name" />
+                                        <h:inputText
+                                            binding="#{firstName}"
+                                            styleClass="form-control" id="firstName" p:placeholder="First Name" value="#{signUpController.guest.firstName}"/>
+                                        <h:messages for="firstName" style = "list-style: none;"/>
+                                    </h:panelGroup>
+                                </p>
+                                 <p>
+                                    <h:panelGroup layout="block" class="form-group first">
+                                        <h:outputLabel for="userName" value="Last Name" />
+                                        <h:inputText
+                                            binding="#{lastName}"
+                                            styleClass="form-control" id="lastName" p:placeholder="Last Name" value="#{signUpController.guest.lastName}"/>
+                                        <h:messages for="lastName" style = "list-style: none;"/>
+                                    </h:panelGroup>
+                                </p>
+                                <p>
+                                    <h:panelGroup layout="block" class="form-group first">
+                                        <h:outputLabel for="email" value="Email" />
+                                        <h:inputText
+                                            binding="#{email}"
+                                            styleClass="form-control" id="email" p:placeholder="email" value="#{signUpController.guest.guestEmailAddress}"/>
+                                        <h:messages for="email" style = "list-style: none;"/>
+                                    </h:panelGroup>
+                                </p>
+                                <p>
+                                    <h:panelGroup layout="block" class="form-group first">
+                                        <h:outputLabel for="userName" value="User Name" />
+                                        <h:inputText
+                                            binding="#{userName}"
+                                            styleClass="#{userName.valid ? 'form-control' :'form-control is-invalid'}" id="userName" p:placeholder="User Name" value="#{signUpController.guest.user.userName}"/>
+                                        <h:messages for="userName" style = "list-style: none;"/>
+                                    </h:panelGroup>
+                                </p>
+                                
+                                    <h:panelGroup class="form-group mb-3">
+                                        <h:outputLabel for="password" value="Password" />
+                                        <h:inputSecret 
+                                            binding="#{password}"
+                                            id="password" 
+                                            styleClass="#{password.valid ? 'form-control' :'form-control is-invalid'}" p:placeholder="Password" value="#{signUpController.guest.user.password}"/>
+                                        <h:messages for="password" style = "list-style: none;"/>
+                                    </h:panelGroup>
+                                <div>
+                                    <h:commandButton class="btn btn-block btn-primary" value="Signup" action="#{signUpController.saveUser()}" />
+                                </div>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </ui:define>
+
+</ui:composition>

@@ -8,9 +8,9 @@
 
     <ui:define name="content">
         
-        <body class="welcomeImg" >
+        <body class="welcomeImg" style="background-image: url(#{resource['images/HomePage.png']});">
             <div class="bg-img">
-                <div class="container">
+                <div class="container-fluid">
                     <h1>Welcome! #{loginController.authenticatedUser}</h1>
                     <p>You can reserve rooms online via this website.</p>
                 </div>

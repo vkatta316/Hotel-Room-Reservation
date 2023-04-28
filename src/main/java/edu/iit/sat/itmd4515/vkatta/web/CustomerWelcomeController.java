@@ -65,12 +65,13 @@ public class CustomerWelcomeController {
     private void postContruct(){
         LOG.info("GuestController.postConstruct() with " + loginController.getAuthenticatedUser());
         guest = guestService.findGuestByUsername(loginController.getAuthenticatedUser());
-        
+        List<Booking> booking = bookingService.findAll();
+        LOG.info("\t" + booking.toString());
         LOG.info("\t" + guest.toString());
     }
     
      // helper method
-    public void refreshOnwer() {
+    public void refreshCustomer() {
         guest = guestService.findGuestByUsername(loginController.getAuthenticatedUser());
     }
 

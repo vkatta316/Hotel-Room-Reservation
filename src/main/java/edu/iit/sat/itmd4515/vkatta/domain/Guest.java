@@ -71,9 +71,6 @@ public class Guest extends AbstractEntity {
     private List<Booking> bookings = new ArrayList<>();
     
     
-    @ManyToOne
-    @JoinColumn(name = "BOOKING_ID")
-    private Booking booking;
     
     // relationship helper methods
     public void addRoom(Room room) {
@@ -288,14 +285,6 @@ public class Guest extends AbstractEntity {
         }
         return Objects.equals(this.id, other.id);
     }    
-
-    public Booking getBooking() {
-        return booking;
-    }
-
-    public void setBooking(Booking booking) {
-        this.booking = booking;
-    }
 
     public User getUser() {
         return user;

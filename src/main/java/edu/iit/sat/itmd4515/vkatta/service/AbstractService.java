@@ -4,6 +4,7 @@
  */
 package edu.iit.sat.itmd4515.vkatta.service;
 
+import edu.iit.sat.itmd4515.vkatta.domain.Hotel;
 import edu.iit.sat.itmd4515.vkatta.domain.Room;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -60,5 +61,14 @@ public abstract class AbstractService<T> {
         return entity;
     }
     
+     
+    protected T findByName(String name, String type){
+        
+        T entity;
+        entity = em.createNamedQuery(type+".findByName", entityClass)
+                .setParameter("name", name)
+                .getSingleResult();
+        return entity;
+    }
    
 }

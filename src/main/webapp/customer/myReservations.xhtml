@@ -14,10 +14,10 @@
         
         <h:dataTable
             styleClass= "table table-hover table-striped" 
-            value="#{customerWelcomeController.guest.bookings}" 
+            value="#{customerBookingController.guest.bookings}" 
             var="booking" >
             <h:column>
-                <f:facet name="header" >
+                <f:facet name="header">
                     Booking Title
                 </f:facet>
                 <h:outputText
@@ -59,11 +59,27 @@
                     
                 </ui:repeat>
             </h:column>
-           
+            
+            <h:column>
+                <h:link outcome="/customer/viewBooking.xhtml" value="View">
+                    <f:param name="bookingId" value="#{booking.id}"/>
+                </h:link>
+            </h:column>
+            <h:column>    
+                 <h:link outcome="/customer/modifyBooking.xhtml" value="Modify ">
+                    <f:param name="bookingId" value="#{booking.id}"/>
+                </h:link>
+            </h:column>
+            <h:column>
+                <h:link outcome="/customer/cancelBooking.xhtml" value="Cancel ">
+                    <f:param name="bookingId" value="#{booking.id}"/>
+                </h:link>
+            </h:column>
+            
         </h:dataTable>
         
          <h:outputText 
-                value="No Reservations Made Yet!!!" rendered="#{empty customerWelcomeController.guest.bookings}" 
+                value="No Reservations Made Yet!!!" rendered="#{empty customerBookingController.guest.bookings}" 
             />
     </ui:define>
 

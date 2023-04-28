@@ -30,6 +30,7 @@ import java.util.Objects;
 @Table(name = "BOOKING")
 @NamedQuery(name = "Booking.findByName" , query = "select booking from Booking booking where booking.bookingTitle = :name")
 @NamedQuery(name = "Booking.findAll", query="select booking from Booking booking")
+@NamedQuery(name = "Booking.findById" , query = "select booking from Booking booking where booking.id = :id")
 public class Booking extends AbstractEntity {
     
     
@@ -94,6 +95,15 @@ public class Booking extends AbstractEntity {
         }
         if (room.getBookings().contains(this)) {
             room.getBookings().remove(this);
+        }
+    }
+    
+     public void removeGuest(Guest guest) {
+        if (this.guests.contains(guest)) {
+            this.guests.remove(guest);
+        }
+        if (guest.getBookings().contains(this)) {
+            guest.getBookings().remove(this);
         }
     }
 

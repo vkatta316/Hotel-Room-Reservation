@@ -96,6 +96,7 @@ public class RoomController {
 
     public String deleteRoom(){
         LOG.info("Inside deleteRoom " + room.toString() );
+        guestService.deleteRoomForGuest(room);
         return "/manager/welcome.xhtml";
         
     }

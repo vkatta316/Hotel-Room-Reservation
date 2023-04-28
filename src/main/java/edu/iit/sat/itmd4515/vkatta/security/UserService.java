@@ -4,6 +4,7 @@
  */
 package edu.iit.sat.itmd4515.vkatta.security;
 
+import edu.iit.sat.itmd4515.vkatta.domain.Guest;
 import edu.iit.sat.itmd4515.vkatta.service.AbstractService;
 import jakarta.ejb.Stateless;
 import java.util.List;
@@ -21,6 +22,23 @@ public class UserService extends AbstractService<User>{
 
      public List<User> findAll(){
         return super.findAll("User.findAll");
+    }
+     
+      public void signupNewCustomerUser(Guest guest){
+        
+        String groupQuery = "select g from Group g where g.groupName = 'CUSTOMER_GROUP'";
+        
+        Group customerGroup = 
+                em.createQuery(groupQuery, Group.class).getSingleResult();
+        
+        User newUser = guest.getUser();
+        newUser.addGroup(customerGroup);
+        newUser.setEnabled(true);
+        em.persist(newUser);
+        
+        // set with managed entity that we just persisted
+        guest.setUser(newUser);
+        em.persist(guest);
     }
     
 }

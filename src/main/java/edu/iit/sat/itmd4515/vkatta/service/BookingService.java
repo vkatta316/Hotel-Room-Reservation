@@ -25,12 +25,12 @@ public class BookingService extends AbstractService<Booking>{
         return super.findAll("Booking.findAll");
     }
     
-     public void addBookingForCustomer(Booking booking, Guest customer){
+     public void addBookingForCustomer(List<Booking> booking, Guest customer){
         //
         em.persist(booking);
         
         Guest managedCustomerRef = em.getReference(Guest.class,customer.getId());
-        managedCustomerRef.setBooking(booking);
+        managedCustomerRef.setBookings( booking);
         em.merge(managedCustomerRef);  
     }
      
@@ -49,4 +49,40 @@ public class BookingService extends AbstractService<Booking>{
         managedBookingRef.addRoom(room);
         em.merge(managedBookingRef);        
     }
+     
+    /**
+     *
+     * @param booking
+     */
+    public void modifyAppointment(Booking booking){
+        // first step, get a managed reference to work with
+        Booking managedBooking = em.getReference(Booking.class, booking.getId());
+        
+       
+        em.merge(managedBooking);
+    }
+
+    
+   
+    /**
+     * @param guest
+     * @param booking
+     */
+    public void cancelBooking(Booking booking, Guest guest){
+        booking  = em.getReference(Booking.class, booking.getId());
+        System.out.println("BOOKING VK" +booking);
+        System.out.println("GUEST VK" +guest.toString());
+        booking.removeGuest(guest);
+        guest.removeBooking(booking);
+        delete(booking);
+        System.out.println("GUEST Bookings" +guest.getBookings());
+        
+    }
+    
+     public Booking findBookingById(Long id) {
+        return em.createNamedQuery("Group.findById", Booking.class)
+                .setParameter("id", id)
+                .getSingleResult();
+    }
+   
 }

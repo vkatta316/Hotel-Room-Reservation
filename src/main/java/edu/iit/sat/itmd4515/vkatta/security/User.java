@@ -26,7 +26,8 @@ import java.util.List;
 @NamedQuery(name = "User.findByName" , query = "select user from User user where user.userName = :name")
 @NamedQuery(name = "User.findAll", query="select user from User user")
 public class User {
-
+    
+    
     @Id
     @NotBlank(message ="User Name cannot be empty")
     private String userName;
@@ -47,6 +48,8 @@ public class User {
         this.password = password;
         this.enabled = enabled;
     }
+
+    
     
     //helper method
     public void addGroup(Group group){

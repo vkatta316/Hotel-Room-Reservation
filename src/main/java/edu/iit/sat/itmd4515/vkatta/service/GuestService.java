@@ -44,8 +44,7 @@ public class GuestService extends AbstractService<Guest> {
     }
  
     
-     public void createBookingForGuest(Booking booking, Guest customer){
-        // all that is happening in the default create method:        
+     public void createBookingForGuest(Booking booking, Guest customer){     
         em.persist(booking);
         Guest managedGuestRef = em.getReference(Guest.class, customer.getId());
         managedGuestRef.addBooking(booking);
@@ -62,5 +61,15 @@ public class GuestService extends AbstractService<Guest> {
         managedRoomReference.setRoomDescription(room.getRoomDescription());
         em.merge(managedRoomReference);
     }
+     
+    public void deleteRoomForGuest(Room room){
+        room = em.getReference(Room.class, room.getId());
+        em.remove(room);
+    }
 
+    public void removeBookingForGuest(Booking booking, Guest customer){
+        Guest managedGuestRef = em.getReference(Guest.class, customer.getId());
+        managedGuestRef.removeBooking(booking);
+        em.merge(managedGuestRef);        
+    }
 }
