@@ -7,16 +7,23 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     Author     : vinaychowdarykatta
 */
 
+html,
 body {
-  min-height: 75rem;
-  padding-top: 4.5rem;
+  height: 100%;
+  background-color: #fff;
 }
+body {
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0,0,0,.5);
+}
+
 
 .header-container {
     line-spacing: 10px;
 }
 
 .logoutLink{
+    display: inline-block;
     padding-right: 4rem;
     color: #c3a6a6;
     text-decoration: none;
@@ -29,7 +36,7 @@ body {
     padding: 0 10px 0 0;
 }
 
-.form-group{
+.form-group, .form-control, .alert-info{
     width: 50%;
 }
 
@@ -41,10 +48,7 @@ body {
     margin: 5px 0 0;
 }
 
-.welcomeImg{
-    background-size: cover;
-    background-position: center;
-}
+
 
 .container-fluid{
     display: flex;
@@ -52,6 +56,198 @@ body {
     flex-wrap: wrap;
 }
 
+
+/*
+ * Globals
+ */
+
+/* Links */
+a,
+a:focus,
+a:hover {
+  color: #fff;
+}
+
+/* Custom default button */
+.btn-default,
+.btn-default:hover,
+.btn-default:focus {
+  color: #333;
+  text-shadow: none; /* Prevent inheritence from `body` */
+  background-color: #fff;
+  border: 1px solid #fff;
+}
+
+
+/*
+ * Base structure
+ */
+
+/* Extra markup and styles for table-esque vertical and horizontal centering */
+.site-wrapper {
+  display: table;
+  width: 100%;
+  
+  background-color: #000;
+  height: 100%; 
+  min-height: 100%;
+}
+.site-wrapper-inner {
+  display: table-cell;
+  vertical-align: top;
+}
+.cover-container {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* Padding for spacing */
+.inner {
+  padding: 30px;
+}
+
+
+/*
+ * Header
+ */
+.masthead-brand {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.masthead-nav > li,
+.masthead-nav{
+  display: inline-block;
+}
+.masthead-nav > li + li,
+.masthead-nav {
+  margin-left: 20px;
+}
+.masthead-nav > li > a,
+.masthead-nav{
+  padding-right: 0;
+  padding-left: 0;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff; /* IE8 proofing */
+  color: rgba(255,255,255,.75);
+  border-bottom: 2px solid transparent;
+}
+.masthead-nav > li > a:hover,
+.masthead-nav > li > a:focus
+{
+  background-color: transparent;
+  border-bottom-color: #a9a9a9;
+  border-bottom-color: rgba(255,255,255,.25);
+}
+.masthead-nav > .active > a,
+.masthead-nav > .active > a:hover,
+.masthead-nav > .active > a:focus {
+  color: #fff;
+  border-bottom-color: #fff;
+}
+
+@media (min-width: 768px) {
+  .masthead-brand {
+    float: left;
+  }
+}
+
+/*
+ * Cover
+*/
+
+.cover {
+  padding: 0 20px;
+}
+.cover .btn-lg {
+  padding: 10px 20px;
+  font-weight: bold;
+}
+
+/*
+ * Affix and center
+ */
+
+@media (min-width: 768px) {
+  /* Pull out the header and footer */
+  .masthead {
+    position: fixed;
+    top: 0;
+  }
+  /* Start the vertical centering */
+  .site-wrapper-inner {
+    vertical-align: middle;
+  }
+
+}
+
+.check-date-form-container, .header-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#tableColor{
+    color: aquamarine;
+}
+
+h1, p, .success, .card-title, .card-text, .card-header{
+    color: aquamarine;
+}
 .card{
-   margin: 1rem;
+    background: #0a0a09;  
+    margin: 1rem;
+}
+
+.action{
+    margin:0.5rem
+}
+
+.actionBtn{
+    border: box;   
+}
+
+.margin {
+    margin: 1rem;   
+}
+
+.btn{
+    background: orange;
+    border: none
+}
+.header-lead{
+    padding-top: 7rem;
+}
+
+
+
+.bg-img {
+    
+    /* Control the height of the image */
+    min-height: 34rem;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.centered {
+  position: absolute;
+  top: 1rem;
+  left: 3rem;
+  color:#093526;
+}
+
+.errorMsg{
+    color: red
+}
+
+.relative{
+    position: relative;
+  text-align: center;
+  color: white;
 }

@@ -12,12 +12,14 @@ body {
     background-color: #fff;
 }
 
-h3{
+h3, p{
     font-family: "Roboto", sans-serif;
+    color: aquamarine
 }
 
 .mb-3{
     margin-bottom: 1rem!important;
+    
 }
 
 .loginNotes {
@@ -40,14 +42,15 @@ h3{
 }
 
 .half .contents {
-    background: #f6f7fc;
+    background: #000;
 }
 
 .half .btn {
-    height: 3rem;
     margin: 1rem;
-    width: 6rem;
     background: orange;
     border: none
 }
 
+.first{
+    color: aquamarine
+}

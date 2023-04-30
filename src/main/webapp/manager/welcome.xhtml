@@ -9,31 +9,31 @@
     <ui:define name="title">
 
     </ui:define>
-     
+
     <ui:define name="content">
         Manage Rooms
 
-        <h:dataTable styleClass= "table table-hover table-striped" value="#{roomService.findAll()}" var="room" >
+        <h:dataTable id="tableColor" styleClass= "table table-hover table-striped" value="#{roomService.findAll()}" var="room" >
             <h:column>
                 <f:facet name="header" >
                     Room Number
                 </f:facet>
-                <h:outputText
-                    value = "#{room.id}" >
+                <h:outputText class="success"
+                              value = "#{room.id}" >
                 </h:outputText>
             </h:column>
 
             <h:column>
                 <f:facet name="header">Room Type</f:facet>
-                <h:outputText value="#{room.roomType}" />
+                <h:outputText class="success" value="#{room.roomType}" />
             </h:column>
-            
+
             <h:column>
                 <f:facet name="header" >
                     Room Description
                 </f:facet>
-                <h:outputText
-                    value = "#{room.roomDescription}" >
+                <h:outputText class="success"
+                              value = "#{room.roomDescription}" >
                 </h:outputText>
             </h:column>
 
@@ -41,8 +41,8 @@
                 <f:facet name="header" >
                     Price
                 </f:facet>
-                <h:outputText
-                    value = "#{room.price}" >
+                <h:outputText class="success"
+                              value = "#{room.price}" >
                 </h:outputText>
             </h:column>
 
@@ -50,22 +50,21 @@
                 <f:facet name="header" >
                     Persons Allowed
                 </f:facet>
-                <h:outputText
-                    value = "#{room.personsAllowed}" >
+                <h:outputText class="success"
+                              value = "#{room.personsAllowed}" >
                 </h:outputText>
             </h:column>
 
-            
-          <h:column>
-            <h:form>
-                <h:commandButton value="Read" action="#{roomController.displayReadRoomPage(room)}" />
-                <h:commandButton value="Update" action="#{roomController.displayUpdateRoomPage(room)}" />
-                <h:commandButton value="Delete" action="#{roomController.displayDeleteRoomPage(room)}" />
-            </h:form>
-        </h:column>
+            <h:column>
+                <h:form class = "actions">
+                    <h:commandButton class = "btn btn-secondary action" value="Read" action="#{roomController.displayReadRoomPage(room)}" />
+                    <h:commandButton class = "btn btn-secondary action" value="Update" action="#{roomController.displayUpdateRoomPage(room)}" />
+                    <h:commandButton class = "btn btn-secondary action" value="Delete" action="#{roomController.displayDeleteRoomPage(room)}" />
+                </h:form>
+            </h:column>
         </h:dataTable>
 
-        
+
     </ui:define>
 
 </ui:composition>

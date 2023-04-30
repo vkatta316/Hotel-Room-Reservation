@@ -40,8 +40,11 @@ public class AvailableRoomsController implements Serializable {
     List<Room> availableRooms;
     List<Booking> reservation;
 
+    private Booking booking;
+
     String checkInDate;
     String checkOutDate;
+    String errorMsg;
 
     @EJB
     RoomService roomService;
@@ -54,7 +57,7 @@ public class AvailableRoomsController implements Serializable {
 
     @PostConstruct
     private void postContruct() {
-
+        booking = new Booking();
     }
 
     //action methods
@@ -69,21 +72,28 @@ public class AvailableRoomsController implements Serializable {
         availableRooms = roomService.findAll();
 
         reservation = bookingService.findAll();
+        
+       
+        
         System.out.println("edu.iit.sat.itmd4515.vkatta.web.AvailableRoomsController.doGet() reservation" + reservation.size());
         System.out.println("edu.iit.sat.itmd4515.vkatta.web.AvailableRoomsController.doGet() availableRooms" + availableRooms.size());
 
+        if (checkInDate.isEmpty() || checkOutDate.isEmpty() ||isCheckInDateInPast(checkInDate)|| isDateAfterThan(checkInDate, checkOutDate)) {
+            errorMsg = "Date Search should be in the Future Or Present. Please try again!!!";
+            return "/customer/bookingPage.xhtml";
+        }
+        errorMsg = "";
         for (int i = 0; i < reservation.size(); i++) {
-            
-                for(int j = 0; j < availableRooms.size(); j++) {
-                    boolean sameCheckInDate = reservation.get(i).getBookingFromDate().toString().equals(checkInDate);
-                    boolean sameCheckOutDate = reservation.get(i).getBookingToDate().toString().equals(checkOutDate);
-                   if(reservation.get(i).getRooms().get(i).getId().toString().equals(availableRooms.get(j).getId().toString()) && sameCheckInDate && sameCheckOutDate) {
-                        availableRooms.remove(j);
-                        break;
-                    }
+            for (int j = 0; j < availableRooms.size(); j++) {
+                boolean sameCheckInDate = reservation.get(i).getBookingFromDate().toString().equals(checkInDate);
+                boolean sameCheckOutDate = reservation.get(i).getBookingToDate().toString().equals(checkOutDate);
+                if (reservation.get(i).getRooms().get(i).getId().toString().equals(availableRooms.get(j).getId().toString()) && sameCheckInDate && sameCheckOutDate) {
+                    availableRooms.remove(j);
+                    break;
                 }
             }
-        
+        }
+
         LOG.info("edu.iit.sat.itmd4515.vkatta.web.AvailableRoomsController.doGet() VK" + availableRooms);
         return "/customer/available_rooms.xhtml";
     }
@@ -101,7 +111,21 @@ public class AvailableRoomsController implements Serializable {
             return false;
         }
     }
+    
+     private boolean isCheckInDateInPast(String firstDate) {
 
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date todayDate;
+            Date date1 = dateFormatter.parse(firstDate);
+            todayDate = dateFormatter.parse(dateFormatter.format(new Date() ));
+            return date1.compareTo(todayDate) < 0;
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+     
     public List<Room> getAvailableRooms() {
         return availableRooms;
     }
@@ -124,5 +148,21 @@ public class AvailableRoomsController implements Serializable {
 
     public void setCheckOutDate(String checkOutDate) {
         this.checkOutDate = checkOutDate;
+    }
+
+    public Booking getBooking() {
+        return booking;
+    }
+
+    public void setBooking(Booking booking) {
+        this.booking = booking;
+    }
+
+    public String getErrorMsg() {
+        return errorMsg;
+    }
+
+    public void setErrorMsg(String errorMsg) {
+        this.errorMsg = errorMsg;
     }
 }

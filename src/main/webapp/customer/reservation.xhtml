@@ -12,13 +12,11 @@
     </ui:define>
 
     <ui:define name="content">
-           
-        <div class="header lead">
-            <h1>Final Reservation</h1>
-            <p>Please, fill the form for complete the reservation process.</p>
-        </div>
-        
-        <div class="container">
+            
+        <div>
+            <div class="header-lead">
+                <h3>Please, fill the form for complete the reservation process.</h3>
+             </div>
             <div class="alert alert-info">
                 <strong>Room Number:</strong> #{bookAvailableRoomController.roomNumber}
             </div>
@@ -32,20 +30,18 @@
             <h:form>
                 <input type="hidden" name="roomId" value="#{bookAvailableRoomController.roomNumber}" />
                 <label class="check-lbl">Full Name</label>
-                <input class="form-control" id="bookingTitle" name="bookingTitle"/>
+                <input class="form-control" id="bookingTitle" name="bookingTitle" type="text" required="true" />
                 <label class="check-lbl">Check-In date</label>
                 <input class="form-control" id="bookingFromDate" name="checkInDate" value="#{bookAvailableRoomController.checkInDate}"/>
                 <label class="check-lbl">Check-Out date</label>
                 <input class="form-control" id="bookingFromDate" name="checkOutDate" value="#{bookAvailableRoomController.checkOutDate}"/>
-                <label class="check-lbl">Comments</label>
-                <input class="form-control" id="bookingDescription" name="bookingDescription" /> 
                 <label class="check-lbl">Email</label>
-                <input class="form-control" id="email" name="email"/>
+                <input class="form-control" id="email" name="email" type="email"/>
                 <label class="check-lbl">Phone</label>
                 <input class="form-control" id="phone" name="phone"/>
                                                                                  
-                <h:commandButton class="btn btn-primary"  value="Reserve Room" action="#{customerBookingController.saveBooking()}" />
-                
+                <h:commandButton class="btn btn-primary margin"  value="Reserve Room" action="#{customerBookingController.saveBooking()}" />
+                 <h:link class="btn btn-secondary margin" outcome="/customer/bookingPage.xhtml">Cancel</h:link>
             </h:form>
         </div>
     </ui:define>

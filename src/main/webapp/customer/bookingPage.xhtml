@@ -14,11 +14,12 @@
 
         <div class="bg-img">
             <div class="header-container">
-                
-                <p>You can reserve rooms online via this website.</p>
+                <p>Please select dates for booking rooms online</p>
+                <p class="errorMsg">#{availableRoomsController.errorMsg}</p>
             </div>
-
+            
             <h:form class="check-date-form-container">
+
                 <div class="form-group mx-sm-3 mb-2">
                     <label class="check-lbl">Check-in date</label>
                     <input type="date" name="checkInDate" class="form-control" placeholder="Check-in date" />
@@ -28,7 +29,11 @@
                     <label class="check-lbl">Check-out date</label>
                     <input type="date" class="form-control" name="checkOutDate" placeholder="Check-out date" />
                 </div>
-                <h:commandButton class="btn btn-success" value="Check Availability" action="#{availableRoomsController.doGet()}" />
+                <div>
+                    <h:commandButton class="btn btn-success margin" value="Check Availability" action="#{availableRoomsController.doGet()}" />
+                    <h:link class="btn btn-secondary margin" outcome="/welcome.xhtml">Cancel</h:link>
+                </div>
+
             </h:form>
         </div>
 

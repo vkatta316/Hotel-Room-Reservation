@@ -16,6 +16,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -36,7 +38,7 @@ public class Booking extends AbstractEntity {
     
     @Column(name = "CUSTOMER_NAME")
     private String bookingTitle;
-     
+
     @Column(name = "CHECK_IN_DATE")
     private LocalDate bookingFromDate;
     
@@ -53,9 +55,7 @@ public class Booking extends AbstractEntity {
     @Size(max = 20)
     @Column(name = "PHONE")
     private String phone;
-    
-    
-    
+
     @ManyToMany(mappedBy = "bookings")
     private List<Guest> guests = new ArrayList<>();
 

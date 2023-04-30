@@ -27,7 +27,7 @@
                                     </h:panelGroup>
                                 </p>
                                 
-                                    <h:panelGroup class="form-group mb-3">
+                                    <h:panelGroup class="form-group mb-3 first">
                                         <h:outputLabel for="password" value="Password" />
                                         <h:inputSecret 
                                             binding="#{password}"
@@ -36,16 +36,15 @@
                                         <h:messages for="password" style = "list-style: none;"/>
                                     </h:panelGroup>
                                 <div>
-                                    <h:commandButton class="btn btn-block btn-primary" value="Login" action="#{loginController.doLogin()}" />
+                                    <h:commandButton class="btn btn-block btn-primary margin" value="Login" action="#{loginController.doLogin()}" />
+                                
+                                    <h:link class="btn btn-secondary margin" outcome="/signUp.xhtml">Sign Up</h:link>
                                 </div>
                             </h:form>
-                            <div>
-                                <h:link class="btn btn-block btn-primary" outcome="/signUp.xhtml">Sign Up</h:link>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </ui:define>

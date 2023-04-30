@@ -80,7 +80,7 @@ public class BookingService extends AbstractService<Booking>{
     }
     
      public Booking findBookingById(Long id) {
-        return em.createNamedQuery("Group.findById", Booking.class)
+        return em.createNamedQuery("Booking.findById", Booking.class)
                 .setParameter("id", id)
                 .getSingleResult();
     }

@@ -16,6 +16,10 @@
             <h1>Available Rooms</h1>
             <p>from <span>#{availableRoomsController.checkInDate}</span> to <span>#{availableRoomsController.checkOutDate}</span></p>
         </div>
+        <div>
+            <h:link class="btn btn-secondary" outcome="/customer/bookingPage.xhtml">Back</h:link>
+        </div>
+        
         <div class="container-fluid">
             <c:forEach var="room" items="#{availableRoomsController.availableRooms}">
                 <h:form class="rooms">

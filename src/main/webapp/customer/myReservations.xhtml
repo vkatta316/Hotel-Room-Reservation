@@ -12,7 +12,7 @@
 
     <ui:define name="content">
         
-        <h:dataTable
+        <h:dataTable id="tableColor"
             styleClass= "table table-hover table-striped" 
             value="#{customerBookingController.guest.bookings}" 
             var="booking" >
@@ -20,16 +20,16 @@
                 <f:facet name="header">
                     Booking Title
                 </f:facet>
-                <h:outputText
+                <h:outputText class="success"
                     value = "Room Reserved for #{booking.bookingTitle}" >
                 </h:outputText>
             </h:column>
 
-            <h:column>
+            <h:column  >
                 <f:facet name="header" >
                     Check In
                 </f:facet>
-                <h:outputText
+                <h:outputText class="success"
                     value = "#{booking.bookingFromDate}" >
                 </h:outputText>
             </h:column>
@@ -38,40 +38,40 @@
                 <f:facet name="header" >
                     Check Out
                 </f:facet>
-                <h:outputText
+                <h:outputText class="success"
                     value = "#{booking.bookingToDate}" >
                 </h:outputText>
             </h:column>
 
             <h:column>
                 <f:facet name="header">Guest Name</f:facet>
-                <h:outputText value="#{booking.guests.size()} Guest " />
+                <h:outputText class="success" value="#{booking.guests.size()} Guest " />
 
                 <ui:repeat value="#{booking.guests}" var="guest">
-                    <h:outputText value="#{guest.firstName}" />
+                    <h:outputText class="success" value="#{guest.firstName}" />
                     
                 </ui:repeat>
             </h:column>
             <h:column>
                 <f:facet name="header">Room Number</f:facet>
                 <ui:repeat value="#{booking.rooms}" var="room">
-                    <h:outputText value="#{room.id}" />
+                    <h:outputText class="success" value="#{room.id}" />
                     
                 </ui:repeat>
             </h:column>
             
             <h:column>
-                <h:link outcome="/customer/viewBooking.xhtml" value="View">
+                <h:link class="btn btn-success" outcome="/customer/viewBooking.xhtml" value="View">
                     <f:param name="bookingId" value="#{booking.id}"/>
                 </h:link>
             </h:column>
             <h:column>    
-                 <h:link outcome="/customer/modifyBooking.xhtml" value="Modify ">
+                 <h:link class="btn btn-success" outcome="/customer/modifyBooking.xhtml" value="Modify ">
                     <f:param name="bookingId" value="#{booking.id}"/>
                 </h:link>
             </h:column>
             <h:column>
-                <h:link outcome="/customer/cancelBooking.xhtml" value="Cancel ">
+                <h:link class="btn btn-success" outcome="/customer/cancelBooking.xhtml" value="Cancel ">
                     <f:param name="bookingId" value="#{booking.id}"/>
                 </h:link>
             </h:column>

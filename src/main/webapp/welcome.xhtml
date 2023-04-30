@@ -7,25 +7,11 @@
 
 
     <ui:define name="content">
-        
-        <body class="welcomeImg" style="background-image: url(#{resource['images/HomePage.png']});">
-            <div class="bg-img">
-                <div class="container-fluid">
-                    <h1>Welcome! #{loginController.authenticatedUser}</h1>
-                    <p>You can reserve rooms online via this website.</p>
-                </div>
-            </div>
-        </body>
-
-
-        <!--        -->
-
-
-        <!--        <h:form>
-                    <ul>
-                        <li><h:commandLink action = "{loginController.doLogout()}" value="Logout" /></li>
-                    </ul>
-                </h:form>-->
+        <div class="relative">
+            <div class="bg-img" style="background-image: url(#{resource['images/HomePage.jpeg']});" />
+            <h1 class="centered">Welcome! #{loginController.authenticatedUser}</h1>
+            
+        </div>
     </ui:define>
 
 </ui:composition>

@@ -11,6 +11,7 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterAll;
@@ -47,7 +48,7 @@ public class HotelJPARelationshipTest {
 
     @BeforeEach
     public void beforeEachTestMethod() {
-        // Create a new Staff record before each test method
+        // Create a new Hotel record before each test method
         createHotelEntry("Hyatt", HotelType.SUPERIOR, "Premium Hotel for B & B", "London" );
     }
     
@@ -98,8 +99,8 @@ public class HotelJPARelationshipTest {
                 
         hotel = new Hotel("Hyatt Regency", HotelType.SUPERIOR, "Bed", "Chicago");
        
-        booking1 = new Booking("Katta's Reservation", LocalDate.now(),LocalDate.now(), "Test");
-        booking2 = new Booking("Katta's Reservation2", LocalDate.now(), LocalDate.now(),"Test2");
+        booking1 = new Booking("Katta's Reservation", LocalDate.of(2023, Month.MAY, 22),LocalDate.of(2023, Month.MAY, 24), "Test");
+        booking2 = new Booking("Katta's Reservation2", LocalDate.of(2023, Month.MAY, 24), LocalDate.of(2023, Month.MAY, 25),"Test2");
         
         booking1.setHotel(hotel);
         booking2.setHotel(hotel);
@@ -121,8 +122,8 @@ public class HotelJPARelationshipTest {
     @Test
     public void testOnetoManyUnidirectionalPaymentBookingsRelationship(){
         payment = new Payment(LocalDate.now(),82000L, PaymentType.ONLINE);
-        booking1 = new Booking("K's Reservation", LocalDate.now(), LocalDate.of(2023, 04, 26), "Test");
-        booking2 = new Booking("K's Reservation2", LocalDate.now(),LocalDate.now(), "Test2");
+        booking1 = new Booking("K's Reservation", LocalDate.now(), LocalDate.of(2023, 05, 26), "Test");
+        booking2 = new Booking("K's Reservation2", LocalDate.now(),LocalDate.of(2023, 05, 26), "Test2");
         List<Booking> bookingList = new ArrayList<>();
         bookingList.add(booking1);
         bookingList.add(booking2);
