@@ -8,7 +8,7 @@ import jakarta.annotation.sql.DataSourceDefinition;
 import jakarta.enterprise.context.ApplicationScoped;
 
 /**
- *
+ * A JDBC driver implementation class with other standard properties for defining the connectivity to the database
  * @author vinaychowdarykatta
  */
 @ApplicationScoped

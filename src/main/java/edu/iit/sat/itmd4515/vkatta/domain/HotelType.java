@@ -5,11 +5,29 @@
 package edu.iit.sat.itmd4515.vkatta.domain;
 
 /**
- *
+ * Types of Hotels
  * @author vinaychowdarykatta
  */
 public enum HotelType {
     
-    SUPERIOR, LUXURY, BUDGET, STANDARD
+    /**
+     * Grade 1
+     */
+    SUPERIOR,
+
+    /**
+     * Grade 2
+     */
+    LUXURY,
+
+    /**
+     * Grade 3
+     */
+    BUDGET,
+
+    /**
+     * Grade 4
+     */
+    STANDARD
     
 }

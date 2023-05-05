@@ -41,17 +41,26 @@ public class HotelJPARelationshipTest {
     Guest guest2;
     Guest guest3;
     
-     @BeforeAll
+    /**
+     *
+     */
+    @BeforeAll
     public static void beforeAllExecution() {
         emf = Persistence.createEntityManagerFactory("itmd4515testPU");
     }
 
+    /**
+     *
+     */
     @BeforeEach
     public void beforeEachTestMethod() {
         // Create a new Hotel record before each test method
         createHotelEntry("Hyatt", HotelType.SUPERIOR, "Premium Hotel for B & B", "London" );
     }
     
+    /**
+     *
+     */
     @Test
     public void testOneToOneUnidirectionalGuestRoomRelationship(){
 
@@ -74,6 +83,9 @@ public class HotelJPARelationshipTest {
         tx.commit();
     }
     
+    /**
+     *
+     */
     @Test
     public void testOneToOneUnidirectionalPaymentAndGuest(){
         payment = new Payment(LocalDate.now(), 2000L, PaymentType.ONLINE);
@@ -94,6 +106,9 @@ public class HotelJPARelationshipTest {
         
     }
     
+    /**
+     *
+     */
     @Test
     public void testManyToOneUnidirectionalBookingsHotelRelationship(){
                 
@@ -119,6 +134,9 @@ public class HotelJPARelationshipTest {
         System.out.println("Navigating the relationship from owning side " + hotel.toString());
     }
     
+    /**
+     *
+     */
     @Test
     public void testOnetoManyUnidirectionalPaymentBookingsRelationship(){
         payment = new Payment(LocalDate.now(),82000L, PaymentType.ONLINE);
@@ -139,6 +157,9 @@ public class HotelJPARelationshipTest {
         System.out.println("Navigating the relationship from owning side " + payment.toString());
     }
     
+    /**
+     *
+     */
     @Test
     public void testManyToOneBiDirectionalGuestHotelRelationship(){
         guest1 = new Guest("Vin", "Katta", "9885952335", "vk@gmail.com", "Guntur");
@@ -212,12 +233,17 @@ public class HotelJPARelationshipTest {
         tx.commit();
     }
     
-   
+    /**
+     *
+     */
     @AfterEach
     public void afterEachTestMethod() {
         deleteHotelEntry("Hyatt");
     }
 
+    /**
+     *
+     */
     @AfterAll
     public static void afterAllExecution() {
 

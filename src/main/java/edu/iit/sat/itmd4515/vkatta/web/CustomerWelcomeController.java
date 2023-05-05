@@ -16,16 +16,11 @@ import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
 /**
- *
+ * Customer welcome page
  * @author vinaychowdarykatta
  */
 @Named
@@ -34,6 +29,9 @@ public class CustomerWelcomeController {
 
     private static final Logger LOG = Logger.getLogger(CustomerWelcomeController.class.getName());
 
+    /**
+     *
+     */
     public CustomerWelcomeController() {
     }
     
@@ -43,16 +41,9 @@ public class CustomerWelcomeController {
     
     private Booking booking;
     
-    List<Room> availableRooms;
-    List<Booking> reservation;
-    
-    
-    String checkInDate;
-    String checkOutDate;
     
     @EJB GuestService guestService;
     
-    @EJB RoomService roomService;
     
     @EJB BookingService bookingService;
     
@@ -71,31 +62,58 @@ public class CustomerWelcomeController {
     }
     
      // helper method
+
+    /**
+     *
+     */
     public void refreshCustomer() {
         guest = guestService.findGuestByUsername(loginController.getAuthenticatedUser());
     }
 
-    
+    /**
+     *
+     * @return
+     */
     public Guest getGuest() {
         return guest;
     }
+
+    /**
+     *
+     * @param guest
+     */
     public void setGuest(Guest guest) {
         this.guest = guest;
     }
     
-
+    /**
+     *
+     * @return
+     */
     public Room getRoom() {
         return room;
     }
 
+    /**
+     *
+     * @param room
+     */
     public void setRoom(Room room) {
         this.room = room;
     }
 
+    /**
+     *
+     * @return
+     */
     public Booking getBooking() {
         return booking;
     }
 
+    /**
+     *
+     * @param booking
+     */
     public void setBooking(Booking booking) {
         this.booking = booking;
     }

@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * This class contain the user information like userName and password
  * @author vinaychowdarykatta
  */
 @Entity
@@ -40,9 +40,18 @@ public class User {
             inverseJoinColumns = @JoinColumn(name ="GROUPNAME"))
     private List<Group> groups = new ArrayList<>();;
 
+    /**
+     *
+     */
     public User() {
     }
 
+    /**
+     *
+     * @param userName
+     * @param password
+     * @param enabled
+     */
     public User(String userName, String password, boolean enabled) {
         this.userName = userName;
         this.password = password;
@@ -52,6 +61,11 @@ public class User {
     
     
     //helper method
+
+    /**
+     *
+     * @param group
+     */
     public void addGroup(Group group){
         if (!this.groups.contains(group)) 
              this.groups.add(group);
@@ -59,6 +73,10 @@ public class User {
             group.getUsers().add(this);
     }
     
+    /**
+     *
+     * @param group
+     */
     public void removeGroup(Group group){
         if (this.groups.contains(group)) 
              this.groups.remove(group);
@@ -85,26 +103,50 @@ public class User {
         this.userName = userName;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     *
+     * @param password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isEnabled() {
         return enabled;
     }
 
+    /**
+     *
+     * @param enabled
+     */
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Group> getGroups() {
         return groups;
     }
 
+    /**
+     *
+     * @param groups
+     */
     public void setGroups(List<Group> groups) {
         this.groups = groups;
     }

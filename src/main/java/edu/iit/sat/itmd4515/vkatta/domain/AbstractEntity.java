@@ -14,12 +14,15 @@ import jakarta.persistence.Version;
 import java.time.LocalDateTime;
 
 /**
- *
+ * Entity class
  * @author vinaychowdarykatta
  */
 @MappedSuperclass
 public class AbstractEntity {
     
+    /**
+     * Unique id for all entities
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
@@ -30,12 +33,18 @@ public class AbstractEntity {
     private LocalDateTime createdTimestamp;
     private LocalDateTime modifiedTimestamp;
     
-    // lifecycle (callback) methods
+
+    /**
+     * Created time for the entity
+     */
     @PrePersist
     public void initCreatedTimestamp() {
         createdTimestamp = LocalDateTime.now();
     }
 
+    /**
+     * Modified time for the entity
+     */
     @PreUpdate
     public void initModifiedTimestamp() {
         modifiedTimestamp = LocalDateTime.now();
@@ -59,27 +68,50 @@ public class AbstractEntity {
         this.id = id;
     }
 
+    /**
+     *
+     * @return unique version id
+     */
     public Long getVersion() {
         return version;
     }
 
+    /**
+     *
+     * @param version
+     */
     public void setVersion(Long version) {
         this.version = version;
     }
     
-    
+    /**
+     *
+     * @return time when entity created
+     */
     public LocalDateTime getCreatedTimestamp() {
         return createdTimestamp;
     }
 
+    /**
+     *
+     * @param createdTimestamp
+     */
     public void setCreatedTimestamp(LocalDateTime createdTimestamp) {
         this.createdTimestamp = createdTimestamp;
     }
 
+    /**
+     *
+     * @return time when entity modified
+     */
     public LocalDateTime getModifiedTimestamp() {
         return modifiedTimestamp;
     }
 
+    /**
+     *
+     * @param modifiedTimestamp
+     */
     public void setModifiedTimestamp(LocalDateTime modifiedTimestamp) {
         this.modifiedTimestamp = modifiedTimestamp;
     }

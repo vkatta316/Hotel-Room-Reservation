@@ -31,17 +31,26 @@ public class HotelJPATest {
     private static EntityTransaction tx;
     Hotel hotel;
     
-     @BeforeAll
+    /**
+     *
+     */
+    @BeforeAll
     public static void beforeAllExecution() {
         emf = Persistence.createEntityManagerFactory("itmd4515testPU");
     }
 
+    /**
+     *
+     */
     @BeforeEach
     public void beforeEachTestMethod() {
         // Create a new Staff record before each test method
         createHotelEntry("Hyatt", HotelType.SUPERIOR, "Premium Hotel for B & B", "London" );
     }
      
+    /**
+     *
+     */
     @Test
     public void createTest(){
         createHotelEntry("Hyatt Place", HotelType.STANDARD, "Standard Hotel for B & B", "London" );
@@ -50,6 +59,9 @@ public class HotelJPATest {
 
     }
     
+    /**
+     *
+     */
     @Test
     public void readTest(){
         // Read test record from database
@@ -59,6 +71,9 @@ public class HotelJPATest {
         System.out.println("Read Hotel Name: " + hotel.toString());
     }
     
+    /**
+     *
+     */
     @Test
     public void updateTest(){
         // get the inserted record
@@ -75,6 +90,9 @@ public class HotelJPATest {
         assertEquals(HotelType.LUXURY,readBackFromDatabase.getHotelType());
     }
     
+    /**
+     *
+     */
     @Test
     public void deleteTest(){
         // Create Test date for delete operation
@@ -116,11 +134,17 @@ public class HotelJPATest {
         tx.commit();
     }
     
+    /**
+     *
+     */
     @AfterEach
     public void afterEachTestMethod() {
         deleteHotelEntry("Hyatt");
     }
 
+    /**
+     *
+     */
     @AfterAll
     public static void afterAllExecution() {
 

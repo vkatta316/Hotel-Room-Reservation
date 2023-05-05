@@ -11,10 +11,9 @@
     </ui:define>
 
     <ui:define name="content">
-        Admin Content Area
         
         
-        <h:dataTable styleClass= "table table-hover table-striped" value="#{roomService.findAll()}" var="room" >
+        <h:dataTable id="tableColor" styleClass= "table table-hover" value="#{roomService.findAll()}" var="room" >
             <h:column>
                 <f:facet name="header" >
                     Room Number
@@ -62,21 +61,12 @@
             
             <h:column>
                 <f:facet name="header">Guest Name</f:facet>
-                
 
                 <ui:repeat value="#{room.guests}" var="guest">
                     <h:outputText value="#{guest.firstName}" />
                 </ui:repeat>
             </h:column>
             
-            <h:column>
-                <f:facet name="header">Booking Name</f:facet>
-                
-
-                <ui:repeat value="#{room.bookings}" var="booking">
-                    <h:outputText value="#{booking.bookingTitle}" />
-                </ui:repeat>
-            </h:column>
         </h:dataTable>
     </ui:define>
 

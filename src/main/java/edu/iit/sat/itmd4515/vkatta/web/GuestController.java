@@ -14,7 +14,7 @@ import jakarta.inject.Named;
 import java.util.logging.Logger;
 
 /**
- *
+ * Guest information
  * @author vinaychowdarykatta
  */
 @Named
@@ -29,8 +29,9 @@ public class GuestController {
     
     @Inject CustomerWelcomeController cwc;
 
-
-    
+    /**
+     *
+     */
     public GuestController() {
     }
     
@@ -40,25 +41,32 @@ public class GuestController {
         guest = new Guest();
     }
     
-    //Action Method
+    /**
+     * Guest is created
+     * @return
+     */
     public String saveGuest(){
         LOG.info("GuestController.saveGuest() -> Saving Guest Application on Click"); 
         LOG.info("Guest is created with all values");
         LOG.info("\t" + guest.toString());
-        
         guestService.create(guest);
-        
-        //guestService.addRoomForCustomer(cwc.getRoom(), guest);
-        
         LOG.info("Guest is created with all values after saving to database");        
         LOG.info("\t" + guest.toString());
-        
         return "/customer/confirmation.xhtml";
     }
     
+    /**
+     *
+     * @return
+     */
     public Guest getGuest() {
         return guest;
     }
+
+    /**
+     *
+     * @param guest
+     */
     public void setGuest(Guest guest) {
         this.guest = guest;
     }

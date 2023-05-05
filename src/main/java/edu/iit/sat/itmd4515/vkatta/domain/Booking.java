@@ -4,11 +4,10 @@
  */
 package edu.iit.sat.itmd4515.vkatta.domain;
 
+import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
@@ -16,20 +15,25 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.FutureOrPresent;
-import jakarta.validation.constraints.NotBlank;
+
 import jakarta.validation.constraints.Size;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlTransient;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 /**
- *
+ * Booking contain the information of client reservation like his name, date and which room and so on. 
  * @author vinaychowdarykatta
  */
 @Entity
 @Table(name = "BOOKING")
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 @NamedQuery(name = "Booking.findByName" , query = "select booking from Booking booking where booking.bookingTitle = :name")
 @NamedQuery(name = "Booking.findAll", query="select booking from Booking booking")
 @NamedQuery(name = "Booking.findById" , query = "select booking from Booking booking where booking.id = :id")
@@ -74,12 +78,18 @@ public class Booking extends AbstractEntity {
       // *Must* Bi-directional One to One relationship between room and guest
     // bi-directional ManyToMany relationship between Owner (owning side) and Pet (inverse side)
     @ManyToMany
+    @XmlTransient
+    @JsonbTransient
     @JoinTable(name = "BOOKINGS_ROOMS",
             joinColumns = @JoinColumn(name = "BOOKING_ID"),
             inverseJoinColumns = @JoinColumn(name = "ROOM_ID"))
     private List<Room> rooms = new ArrayList<>();
     
- // relationship helper methods
+
+    /**
+     * Method to add room for booking
+     * @param room
+     */
     public void addRoom(Room room) {
         if (!this.rooms.contains(room)) {
             this.rooms.add(room);
@@ -89,6 +99,10 @@ public class Booking extends AbstractEntity {
         }
     }
 
+    /**
+     * Method to remove room for booking
+     * @param room
+     */
     public void removeRoom(Room room) {
         if (this.rooms.contains(room)) {
             this.rooms.remove(room);
@@ -98,7 +112,11 @@ public class Booking extends AbstractEntity {
         }
     }
     
-     public void removeGuest(Guest guest) {
+    /**
+     * Method to remove guest for booking
+     * @param guest
+     */
+    public void removeGuest(Guest guest) {
         if (this.guests.contains(guest)) {
             this.guests.remove(guest);
         }
@@ -107,6 +125,13 @@ public class Booking extends AbstractEntity {
         }
     }
 
+    /**
+     *
+     * @param bookingTitle
+     * @param bookingFromDate
+     * @param bookingToDate
+     * @param bookingDescription
+     */
     public Booking(String bookingTitle, LocalDate bookingFromDate, LocalDate bookingToDate, String bookingDescription) {
         this.bookingTitle = bookingTitle;
         this.bookingFromDate = bookingFromDate;
@@ -114,9 +139,21 @@ public class Booking extends AbstractEntity {
         this.bookingDescription = bookingDescription;
     }
 
+    /**
+     *
+     */
     public Booking() {
     }
 
+    /**
+     *
+     * @param bookingTitle
+     * @param bookingFromDate
+     * @param bookingToDate
+     * @param bookingDescription
+     * @param email
+     * @param phone
+     */
     public Booking(String bookingTitle, LocalDate bookingFromDate, LocalDate bookingToDate, String bookingDescription, String email, String phone) {
         this.bookingTitle = bookingTitle;
         this.bookingFromDate = bookingFromDate;
@@ -126,7 +163,6 @@ public class Booking extends AbstractEntity {
         this.phone = phone;
     }
     
-    //helper methods for relationships
    
     /**
      * Get the value of bookingTitle
@@ -146,27 +182,50 @@ public class Booking extends AbstractEntity {
         this.bookingTitle = bookingTitle;
     }
 
-
+    /**
+     *
+     * @return payment amount
+     */
     public Payment getPayment() {
         return payment;
     }
 
+    /**
+     *
+     * @param payment
+     */
     public void setPayment(Payment payment) {
         this.payment = payment;
     }
 
+    /**
+     * CheckIn date of customer
+     * @return
+     */
     public LocalDate getBookingFromDate() {
         return bookingFromDate;
     }
 
+    /**
+     * 
+     * @param bookingFromDate
+     */
     public void setBookingFromDate(LocalDate bookingFromDate) {
         this.bookingFromDate = bookingFromDate;
     }
 
+    /**
+     * CheckOut date of customer
+     * @return
+     */
     public LocalDate getBookingToDate() {
         return bookingToDate;
     }
 
+    /**
+     *
+     * @param bookingToDate
+     */
     public void setBookingToDate(LocalDate bookingToDate) {
         this.bookingToDate = bookingToDate;
     }
@@ -207,6 +266,10 @@ public class Booking extends AbstractEntity {
         this.hotel = hotel;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int hashCode() {
         int hash = 7;
@@ -214,6 +277,11 @@ public class Booking extends AbstractEntity {
         return hash;
     }
 
+    /**
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -232,39 +300,75 @@ public class Booking extends AbstractEntity {
         return Objects.equals(this.id, other.id);
     }
 
+    /**
+     *
+     * @return
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     *
+     * @param email
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getPhone() {
         return phone;
     }
 
+    /**
+     *
+     * @param phone
+     */
     public void setPhone(String phone) {
         this.phone = phone;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return "Booking{" + "bookingTitle=" + bookingTitle + ", bookingFromDate=" + bookingFromDate + ", bookingToDate=" + bookingToDate + ", bookingDescription=" + bookingDescription + ", email=" + email + ", phone=" + phone + '}';
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Guest> getGuests() {
         return guests;
     }
 
+    /**
+     *
+     * @param guests
+     */
     public void setGuests(List<Guest> guests) {
         this.guests = guests;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Room> getRooms() {
         return rooms;
     }
 
+    /**
+     *
+     * @param rooms
+     */
     public void setRooms(List<Room> rooms) {
         this.rooms = rooms;
     }

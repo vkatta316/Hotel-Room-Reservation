@@ -9,9 +9,6 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
@@ -22,7 +19,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- *
+ * Payment contain the information related to booking payments like payment date, amount, type 
  * @author vinaychowdarykatta
  */
 @Entity
@@ -46,6 +43,12 @@ public class Payment extends AbstractEntity {
     @JoinColumn(name = "PAYMENT_GUEST_ID")
     private Guest guest;
 
+    /**
+     *
+     * @param paymentDate
+     * @param paymentAmount
+     * @param paymentType
+     */
     public Payment(LocalDate paymentDate, Long paymentAmount, PaymentType paymentType) {
         
         this.paymentDate = paymentDate;
@@ -58,6 +61,9 @@ public class Payment extends AbstractEntity {
     @JoinColumn(name="PAYMENT_ID")
     private List<Booking> bookings;
     
+    /**
+     *
+     */
     public Payment() {
     }
 
@@ -154,11 +160,19 @@ public class Payment extends AbstractEntity {
         this.bookings = bookings;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return "Payment{" + "paymentId=" + id + ", paymentDate=" + paymentDate + ", paymentAmount=" + paymentAmount + ", paymentType=" + paymentType + '}';
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int hashCode() {
         int hash = 7;
@@ -166,6 +180,11 @@ public class Payment extends AbstractEntity {
         return hash;
     }
 
+    /**
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

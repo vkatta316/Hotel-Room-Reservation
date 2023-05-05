@@ -10,24 +10,20 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;  
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.Size;
-import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 /**
- *
+ * Hotel contain the information of about it like name, address and type of hotel
  * @author vinaychowdarykatta
  */
 @Entity
@@ -61,10 +57,20 @@ public class Hotel extends AbstractEntity {
     @JoinColumn(name = "USERNAME")
     private User user;
     
+    /**
+     *
+     */
     public Hotel(){
         
     }
 
+    /**
+     *
+     * @param hotelName
+     * @param hotelType
+     * @param hotelDescription
+     * @param hotelAddress
+     */
     public Hotel(String hotelName, HotelType hotelType, String hotelDescription, String hotelAddress) {
         this.hotelName = hotelName;
         this.hotelType = hotelType;
@@ -165,7 +171,10 @@ public class Hotel extends AbstractEntity {
         this.guestList = guestList;
     }
 
-
+    /**
+     *
+     * @return
+     */
     @Override
     public int hashCode() {
         int hash = 3;
@@ -173,6 +182,11 @@ public class Hotel extends AbstractEntity {
         return hash;
     }
 
+    /**
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -192,15 +206,27 @@ public class Hotel extends AbstractEntity {
         return Objects.equals(this.id, other.id);
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return "Hotel{" + "hotelId=" + id + ", hotelName=" + hotelName + ", hotelType=" + hotelType + ", hotelDescription=" + hotelDescription + ", hotelAddress=" + hotelAddress + '}';
     }
 
+    /**
+     *
+     * @return
+     */
     public User getUser() {
         return user;
     }
 
+    /**
+     *
+     * @param user
+     */
     public void setUser(User user) {
         this.user = user;
     }

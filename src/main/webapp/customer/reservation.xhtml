@@ -14,9 +14,6 @@
     <ui:define name="content">
             
         <div>
-            <div class="header-lead">
-                <h3>Please, fill the form for complete the reservation process.</h3>
-             </div>
             <div class="alert alert-info">
                 <strong>Room Number:</strong> #{bookAvailableRoomController.roomNumber}
             </div>
@@ -27,6 +24,9 @@
                 <strong>Price for one night: </strong><span id='price'>#{bookAvailableRoomController.price} $ </span><br/>
                 <strong>Total price: </strong> <span id='totalPrice'>#{bookAvailableRoomController.totalPrice} $</span>
             </div>
+            <div class="header-lead">
+                <h3>Please, fill the form to complete the reservation process.</h3>
+             </div>
             <h:form>
                 <input type="hidden" name="roomId" value="#{bookAvailableRoomController.roomNumber}" />
                 <label class="check-lbl">Full Name</label>

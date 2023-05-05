@@ -5,7 +5,6 @@
 package edu.iit.sat.itmd4515.vkatta.service;
 
 import edu.iit.sat.itmd4515.vkatta.domain.Booking;
-import edu.iit.sat.itmd4515.vkatta.domain.BookingType;
 import edu.iit.sat.itmd4515.vkatta.domain.Guest;
 import edu.iit.sat.itmd4515.vkatta.domain.Hotel;
 import edu.iit.sat.itmd4515.vkatta.domain.HotelType;
@@ -50,6 +49,9 @@ public class DatabaseInitService {
     @EJB
     private GroupService groupService;
 
+    /**
+     * Load initial data for the entities 
+     */
     public DatabaseInitService() {
 
     }
@@ -124,12 +126,16 @@ public class DatabaseInitService {
         guestList.add(g2);
 
         // Create Rooms
-        Room r1 = new Room("Single", "Single Room", 250.00, 2);
-        Room r2 = new Room("Double", "Double Room", 200.00, 3);
+        Room r1 = new Room("Single", "Single Room", 200.00, 2);
+        Room r2 = new Room("Double", "Double Room", 250.00, 3);
         Room r3 = new Room("Quad", "Quad Room", 300.00, 4);
+        Room r4 = new Room("Meeting", "Meeting Room", 800.00, 20);
+        Room r5 = new Room("Single Non-AC", "Delux Room", 100.00, 1);
         roomService.create(r1);
         roomService.create(r2);
         roomService.create(r3);
+        roomService.create(r4);
+        roomService.create(r5);
 
         // Set room id to guest
         g1.addRoom(r1);

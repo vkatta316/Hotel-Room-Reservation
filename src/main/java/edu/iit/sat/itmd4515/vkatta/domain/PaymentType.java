@@ -5,11 +5,24 @@
 package edu.iit.sat.itmd4515.vkatta.domain;
 
 /**
- *
+ * Mode of payment type 
  * @author vinaychowdarykatta
  */
 public enum PaymentType {
     
-    ONLINE, CASH, VOUCHER
+    /**
+     * Online transaction
+     */
+    ONLINE,
+
+    /**
+     * Cash transaction
+     */
+    CASH,
+
+    /**
+     * Voucher payment or using Coupon code
+     */
+    VOUCHER
     
 }

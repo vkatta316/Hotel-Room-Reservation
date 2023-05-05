@@ -11,15 +11,23 @@ import java.util.List;
 
 /**
  *
+ * Methods related to Hotel entity
  * @author vinaychowdarykatta
  */
 @Stateless
 public class HotelService extends AbstractService<Hotel>{
     
-   public HotelService() {
+    /**
+     *
+     */
+    public HotelService() {
         super(Hotel.class);
     }
     
+    /**
+     * Find list of all hotels
+     * @return all the hotels
+     */
     public List<Hotel> findAll(){
         return super.findAll("Hotel.findAll");
     }

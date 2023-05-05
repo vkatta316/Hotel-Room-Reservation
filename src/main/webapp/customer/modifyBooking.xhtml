@@ -19,6 +19,7 @@
     </ui:define>
 
     <ui:define name="content">
+        <h5 class="errorMsg">Please do not refresh or navigate back without performing Modify Operation</h5>
         <ezcomp:booking booking="#{customerBookingController.booking}" 
                      operation="update"
                      action="#{availableRoomsController.doGet()}"/>

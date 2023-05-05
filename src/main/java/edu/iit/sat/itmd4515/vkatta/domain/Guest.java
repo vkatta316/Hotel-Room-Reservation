@@ -5,6 +5,7 @@
 package edu.iit.sat.itmd4515.vkatta.domain;
 
 import edu.iit.sat.itmd4515.vkatta.security.User;
+import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -12,22 +13,27 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQuery;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlTransient;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 /**
- *
+ * Client Information like his name, email, phone number, address 
  * @author vinaychowdarykatta
  */
 @Entity
 @Table(name = "GUEST")
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 @NamedQuery(name = "Guest.findByName" , query = "select guest from Guest guest where guest.firstName = :name")
 @NamedQuery(name = "Guest.findAll", query="select guest from Guest guest")
 @NamedQuery(name = "Guest.findByUsername" , query = "select guest from Guest guest where guest.user.userName = :username")
@@ -59,12 +65,16 @@ public class Guest extends AbstractEntity {
      // *Must* Bi-directional One to One relationship between room and guest
     // bi-directional ManyToMany relationship between Owner (owning side) and Pet (inverse side)
     @ManyToMany
+    @XmlTransient
+    @JsonbTransient
     @JoinTable(name = "GUESTS_ROOMS",
             joinColumns = @JoinColumn(name = "GUEST_ID"),
             inverseJoinColumns = @JoinColumn(name = "ROOM_ID"))
     private List<Room> rooms = new ArrayList<>();
     
     @ManyToMany
+    @XmlTransient
+    @JsonbTransient
     @JoinTable(name = "GUESTS_BOOKINGS",
             joinColumns = @JoinColumn(name = "GUEST_ID"),
             inverseJoinColumns = @JoinColumn(name = "BOOKING_ID"))
@@ -73,6 +83,11 @@ public class Guest extends AbstractEntity {
     
     
     // relationship helper methods
+
+    /**
+     *
+     * @param room
+     */
     public void addRoom(Room room) {
         if (!this.rooms.contains(room)) {
             this.rooms.add(room);
@@ -82,6 +97,10 @@ public class Guest extends AbstractEntity {
         }
     }
 
+    /**
+     *
+     * @param room
+     */
     public void removeRoom(Room room) {
         if (this.rooms.contains(room)) {
             this.rooms.remove(room);
@@ -91,7 +110,11 @@ public class Guest extends AbstractEntity {
         }
     }
     
-     public void addBooking(Booking booking) {
+    /**
+     *
+     * @param booking
+     */
+    public void addBooking(Booking booking) {
         if (!this.bookings.contains(booking)) {
             this.bookings.add(booking);
         }
@@ -100,6 +123,10 @@ public class Guest extends AbstractEntity {
         }
     }
 
+    /**
+     *
+     * @param booking
+     */
     public void removeBooking(Booking booking) {
         if (this.bookings.contains(booking)) {
             this.bookings.remove(booking);
@@ -109,6 +136,14 @@ public class Guest extends AbstractEntity {
         }
     }
     
+    /**
+     *
+     * @param firstName
+     * @param lastName
+     * @param guestMobileNumber
+     * @param guestEmailAddress
+     * @param guestAddress
+     */
     public Guest(String firstName, String lastName, String guestMobileNumber, String guestEmailAddress, String guestAddress) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -117,6 +152,9 @@ public class Guest extends AbstractEntity {
         this.guestAddress = guestAddress;
     }
 
+    /**
+     *
+     */
     public Guest() {
     }
     
@@ -255,12 +293,19 @@ public class Guest extends AbstractEntity {
         this.bookings = bookings;
     }
     
-    
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return "Guest{" + "guestId=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", guestMobileNumber=" + guestMobileNumber + ", guestEmailAddress=" + guestEmailAddress + ", guestAddress=" + guestAddress + '}';
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int hashCode() {
         int hash = 3;
@@ -268,6 +313,11 @@ public class Guest extends AbstractEntity {
         return hash;
     }
 
+    /**
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -286,18 +336,34 @@ public class Guest extends AbstractEntity {
         return Objects.equals(this.id, other.id);
     }    
 
+    /**
+     *
+     * @return
+     */
     public User getUser() {
         return user;
     }
 
+    /**
+     *
+     * @param user
+     */
     public void setUser(User user) {
         this.user = user;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Room> getRooms() {
         return rooms;
     }
 
+    /**
+     *
+     * @param rooms
+     */
     public void setRooms(List<Room> rooms) {
         this.rooms = rooms;
     }

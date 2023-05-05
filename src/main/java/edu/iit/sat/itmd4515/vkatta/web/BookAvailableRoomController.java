@@ -26,7 +26,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Reserve the available room for the customer
  * @author vinaychowdarykatta
  */
 @Named
@@ -45,21 +45,16 @@ public class BookAvailableRoomController implements Serializable {
     Double totalPrice;
     Integer numberOfDays;
     
-    @EJB
-    RoomService roomService;
 
-    @EJB
-    BookingService bookingService;
 
     @Inject
     FacesContext facesContext;
 
-    @PostConstruct
-    private void postContruct() {
 
-    }
-
-    //action methods
+    /**
+     * This method process reservation information of client and calculates the period of stay
+     * @return reservation information
+     */
     public String doGet() {
         HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();
 
@@ -79,7 +74,10 @@ public class BookAvailableRoomController implements Serializable {
         return "/customer/reservation.xhtml";
     }
     
-    //Helper methods
+     /**
+     * This calculates the period of stay by customer
+     * @return
+     */
     private void calculateDays() throws ParseException{
          // calculate number of day
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -90,58 +88,114 @@ public class BookAvailableRoomController implements Serializable {
         totalPrice = numberOfDays * price; 
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Room> getAvailableRooms() {
         return availableRooms;
     }
 
+    /**
+     *
+     * @param availableRooms
+     */
     public void setAvailableRooms(List<Room> availableRooms) {
         this.availableRooms = availableRooms;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getCheckInDate() {
         return checkInDate;
     }
 
+    /**
+     *
+     * @param checkInDate
+     */
     public void setCheckInDate(String checkInDate) {
         this.checkInDate = checkInDate;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getCheckOutDate() {
         return checkOutDate;
     }
 
+    /**
+     *
+     * @param checkOutDate
+     */
     public void setCheckOutDate(String checkOutDate) {
         this.checkOutDate = checkOutDate;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getRoomNumber() {
         return roomNumber;
     }
 
+    /**
+     *
+     * @param roomNumber
+     */
     public void setRoomNumber(String roomNumber) {
         this.roomNumber = roomNumber;
     }
 
+    /**
+     *
+     * @return
+     */
     public Double getTotalPrice() {
         return totalPrice;
     }
 
+    /**
+     *
+     * @param totalPrice
+     */
     public void setTotalPrice(Double totalPrice) {
         this.totalPrice = totalPrice;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getNumberOfDays() {
         return numberOfDays;
     }
 
+    /**
+     *
+     * @param numberOfDays
+     */
     public void setNumberOfDays(Integer numberOfDays) {
         this.numberOfDays = numberOfDays;
     }
 
+    /**
+     *
+     * @return
+     */
     public Double getPrice() {
         return price;
     }
 
+    /**
+     *
+     * @param price
+     */
     public void setPrice(Double price) {
         this.price = price;
     }

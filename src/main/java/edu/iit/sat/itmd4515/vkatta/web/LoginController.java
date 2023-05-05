@@ -22,7 +22,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Sign In and Sign Up Users validation
  * @author vinaychowdarykatta
  */
 @Named
@@ -38,6 +38,9 @@ public class LoginController {
     @Inject
     FacesContext facesContext;
 
+    /**
+     * Default Constructor
+     */
     public LoginController() {
     }
 
@@ -47,24 +50,43 @@ public class LoginController {
         user = new User();
     }
     
+    /**
+     *
+     * @return logged in user
+     */
     public String getAuthenticatedUser(){
-        // REMOTE_USER
         return facesContext.getExternalContext().getRemoteUser();
     }
     
+    /**
+     * Validate admin
+     * @return true/false
+     */
     public boolean isAdmin(){
         return securityContext.isCallerInRole("ADMIN_ROLE");
     }
     
+    /**
+     * Validate customer
+     * @return true/false
+     */
     public boolean isCustomer(){
         return securityContext.isCallerInRole("CUSTOMER_ROLE");
     }
 
+    /**
+     * Validate manager
+     * @return true/false
+     */
     public boolean isManager(){
         return securityContext.isCallerInRole("MANAGER_ROLE");
     }
 
-    //action methods
+
+    /**
+     * Validates the user credentials and client logged in successfully
+     * @return welcome page
+     */
     public String doLogin() {
         LOG.info("LoginController.doLogin() for " + this.user.getUserName());
         HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();
@@ -104,6 +126,10 @@ public class LoginController {
         return "/welcome.xhtml?faces-redirect=true";
     }
     
+    /**
+     * Sign out from the application
+     * @return
+     */
     public String doLogout(){
          HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();
         try {

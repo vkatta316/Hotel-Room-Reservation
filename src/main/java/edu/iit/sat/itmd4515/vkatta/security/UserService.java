@@ -10,21 +10,32 @@ import jakarta.ejb.Stateless;
 import java.util.List;
 
 /**
- *
+ * Sign up User 
  * @author vinaychowdarykatta
  */
 @Stateless
 public class UserService extends AbstractService<User>{
 
+    /**
+     *
+     */
     public UserService() {
         super(User.class);
     }
 
-     public List<User> findAll(){
+    /**
+     *
+     * @return list of all users
+     */
+    public List<User> findAll(){
         return super.findAll("User.findAll");
     }
      
-      public void signupNewCustomerUser(Guest guest){
+    /**
+     * Sign up a new customer 
+     * @param guest
+     */
+    public void signupNewCustomerUser(Guest guest){
         
         String groupQuery = "select g from Group g where g.groupName = 'CUSTOMER_GROUP'";
         

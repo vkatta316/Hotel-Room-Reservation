@@ -5,10 +5,8 @@
 package edu.iit.sat.itmd4515.vkatta.web;
 
 import edu.iit.sat.itmd4515.vkatta.domain.Booking;
-import edu.iit.sat.itmd4515.vkatta.domain.Guest;
 import edu.iit.sat.itmd4515.vkatta.domain.Room;
 import edu.iit.sat.itmd4515.vkatta.service.BookingService;
-import edu.iit.sat.itmd4515.vkatta.service.GuestService;
 import edu.iit.sat.itmd4515.vkatta.service.RoomService;
 
 import jakarta.annotation.PostConstruct;
@@ -60,7 +58,11 @@ public class AvailableRoomsController implements Serializable {
         booking = new Booking();
     }
 
-    //action methods
+
+    /**
+     * This method returns all the available rooms for the selected dated by the client
+     * @return
+     */
     public String doGet() {
         HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();
 
@@ -72,12 +74,7 @@ public class AvailableRoomsController implements Serializable {
         availableRooms = roomService.findAll();
 
         reservation = bookingService.findAll();
-        
        
-        
-        System.out.println("edu.iit.sat.itmd4515.vkatta.web.AvailableRoomsController.doGet() reservation" + reservation.size());
-        System.out.println("edu.iit.sat.itmd4515.vkatta.web.AvailableRoomsController.doGet() availableRooms" + availableRooms.size());
-
         if (checkInDate.isEmpty() || checkOutDate.isEmpty() ||isCheckInDateInPast(checkInDate)|| isDateAfterThan(checkInDate, checkOutDate)) {
             errorMsg = "Date Search should be in the Future Or Present. Please try again!!!";
             return "/customer/bookingPage.xhtml";
@@ -94,13 +91,15 @@ public class AvailableRoomsController implements Serializable {
             }
         }
 
-        LOG.info("edu.iit.sat.itmd4515.vkatta.web.AvailableRoomsController.doGet() VK" + availableRooms);
+        LOG.info("edu.iit.sat.itmd4515.vkatta.web.AvailableRoomsController.doGet() " + availableRooms);
         return "/customer/available_rooms.xhtml";
     }
 
-    //helper methods
+    /**
+     * This method returns true when check-out date is ahead of check-in date
+     * @return true/false
+     */
     private boolean isDateAfterThan(String firstDate, String secondDate) {
-
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date date1 = sdf.parse(firstDate);
@@ -112,7 +111,11 @@ public class AvailableRoomsController implements Serializable {
         }
     }
     
-     private boolean isCheckInDateInPast(String firstDate) {
+    /**
+     * This method returns true when check-in date is not in the past
+     * @return true/false
+     */
+    private boolean isCheckInDateInPast(String firstDate) {
 
         SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
         try {
@@ -126,42 +129,82 @@ public class AvailableRoomsController implements Serializable {
         }
     }
      
+    /**
+     * Get all the available rooms for the duration of stay
+     * @return all the available rooms
+     */
     public List<Room> getAvailableRooms() {
         return availableRooms;
     }
 
+    /**
+     * 
+     * @param availableRooms
+     */
     public void setAvailableRooms(List<Room> availableRooms) {
         this.availableRooms = availableRooms;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getCheckInDate() {
         return checkInDate;
     }
 
+    /**
+     *
+     * @param checkInDate
+     */
     public void setCheckInDate(String checkInDate) {
         this.checkInDate = checkInDate;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getCheckOutDate() {
         return checkOutDate;
     }
 
+    /**
+     *
+     * @param checkOutDate
+     */
     public void setCheckOutDate(String checkOutDate) {
         this.checkOutDate = checkOutDate;
     }
 
+    /**
+     *
+     * @return
+     */
     public Booking getBooking() {
         return booking;
     }
 
+    /**
+     *
+     * @param booking
+     */
     public void setBooking(Booking booking) {
         this.booking = booking;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getErrorMsg() {
         return errorMsg;
     }
 
+    /**
+     *
+     * @param errorMsg
+     */
     public void setErrorMsg(String errorMsg) {
         this.errorMsg = errorMsg;
     }

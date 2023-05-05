@@ -4,30 +4,30 @@
  */
 package edu.iit.sat.itmd4515.vkatta.domain;
 
-import jakarta.persistence.CascadeType;
+import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQuery;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlTransient;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 /**
- *
+ * Room contain the information of the available rooms in the hotel  
  * @author vinaychowdarykatta
  */
 @Entity
 @Table(name = "ROOM")
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 @NamedQuery(name = "Room.findById" , query = "select room from Room room where room.id = :id")
 @NamedQuery(name = "Room.findAll", query="select room from Room room")
 public class Room extends AbstractEntity {
@@ -50,19 +50,38 @@ public class Room extends AbstractEntity {
     //private Hotel hotel;
 
     @ManyToMany(mappedBy = "rooms")
+    @XmlTransient
+    @JsonbTransient
     private List<Guest> guests = new ArrayList<>();
     
     @ManyToMany(mappedBy = "rooms")
+    @XmlTransient
+    @JsonbTransient
     private List<Booking> bookings = new ArrayList<>();
 
+    /**
+     *
+     */
     public Room() {
     }
 
+    /**
+     *
+     * @param roomType
+     * @param roomDescription
+     */
     public Room(String roomType, String roomDescription) {
         this.roomType = roomType;
         this.roomDescription = roomDescription;
     }
 
+    /**
+     *
+     * @param roomType
+     * @param roomDescription
+     * @param price
+     * @param personsAllowed
+     */
     public Room(String roomType, String roomDescription, Double price, Integer personsAllowed) {
         this.roomType = roomType;
         this.roomDescription = roomDescription;
@@ -109,7 +128,10 @@ public class Room extends AbstractEntity {
         this.roomDescription = roomDescription;
     }
  
-
+    /**
+     *
+     * @return
+     */
     @Override
     public int hashCode() {
         int hash = 7;
@@ -117,6 +139,11 @@ public class Room extends AbstractEntity {
         return hash;
     }
 
+    /**
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -136,39 +163,74 @@ public class Room extends AbstractEntity {
         return Objects.equals(this.id, other.id);
     }
 
-
+    /**
+     *
+     * @return
+     */
     public Double getPrice() {
         return price;
     }
 
+    /**
+     *
+     * @param price
+     */
     public void setPrice(Double price) {
         this.price = price;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getPersonsAllowed() {
         return personsAllowed;
     }
 
+    /**
+     *
+     * @param personsAllowed
+     */
     public void setPersonsAllowed(Integer personsAllowed) {
         this.personsAllowed = personsAllowed;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Guest> getGuests() {
         return guests;
     }
 
+    /**
+     *
+     * @param guests
+     */
     public void setGuests(List<Guest> guests) {
         this.guests = guests;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Booking> getBookings() {
         return bookings;
     }
 
+    /**
+     *
+     * @param bookings
+     */
     public void setBookings(List<Booking> bookings) {
         this.bookings = bookings;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return "Room{" + "roomType=" + roomType + ", roomDescription=" + roomDescription + ", price=" + price + ", personsAllowed=" + personsAllowed + '}';

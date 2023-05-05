@@ -10,7 +10,7 @@ import jakarta.persistence.PreUpdate;
 import jakarta.security.enterprise.identitystore.Pbkdf2PasswordHash;
 
 /**
- *
+ * Hashing the password and persisting it
  * @author vinaychowdarykatta
  */
 public class UserPasswordHash {

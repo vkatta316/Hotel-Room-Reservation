@@ -25,18 +25,27 @@ import org.junit.jupiter.api.Test;
 public class HotelValidationTest {
     private static Validator validator;
 
+    /**
+     *
+     */
     @BeforeAll
     public static void beforeAllExecution() {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
     }
 
+    /**
+     *
+     */
     @BeforeEach
     public void beforeEachTestMethod() {
 
     }
     
-     @Test
+    /**
+     *
+     */
+    @Test
     public void hotelIsValid() {
         // Create a Hotel data
         Hotel hotelObj = new Hotel("Hyatt", HotelType.SUPERIOR, "Bed and Breakfast", "London");
@@ -48,6 +57,10 @@ public class HotelValidationTest {
     }
 
    // @Test
+
+    /**
+     *
+     */
     public void validatePastDateSearchAndEmptyHotelName() {
         // create a hotel data
         Hotel hotelObj = new Hotel("", HotelType.SUPERIOR, "Bed and Breakfast", "London");
@@ -67,6 +80,9 @@ public class HotelValidationTest {
 
     }
 
+    /**
+     *
+     */
     @Test
     public void validateMaxSizeForHotelName() {
         // create a Hotel data
@@ -78,13 +94,17 @@ public class HotelValidationTest {
         Assertions.assertEquals("size must be between 2 and 16", violations.iterator().next().getMessage());
     }
     
-    
-    
+    /**
+     *
+     */
     @AfterEach
     public void afterEachTestMethod() {
 
     }
 
+    /**
+     *
+     */
     @AfterAll
     public static void afterAllExecution() {
 

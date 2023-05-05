@@ -12,7 +12,7 @@ import jakarta.security.enterprise.authentication.mechanism.http.LoginToContinue
 import jakarta.security.enterprise.identitystore.DatabaseIdentityStoreDefinition;
 
 /**
- *
+ * Stores credentials and identity attributes in a relational database, and make that implementation available 
  * @author vinaychowdarykatta
  */
 @Named
