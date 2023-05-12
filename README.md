@@ -1,33 +1,44 @@
 # Hotel-Room-Reservation
 
-Project Summary:
+***Project Summary:***
 
 Hotel Management System is a software used in hospitality industry. A hotel reservation system enables guests to schedule dates and length of stay, room selection, and payment all in one place.
+
 In this application, for user book a room in a hotel, a customer must check the application to see if there is an empty room, the duration of the reservation and the overall cost.
 The database provides information about the many types of rooms that are offered by that specific hotel, such as single and double bed rooms, rooms with and without air conditioning, and rooms with both. Also, it doesn’t allow users to book the room that is already occupied by other client.
 Implemented functionality using Enterprise JavaBeans (EJBs), which provide features like declarative transactions and security via annotations.
-For all the pages like Home, Booking, My Reservations , Manage Rooms we used the similar reusable template named pageTemplate and loginTemplate for login page. I used booking and room composite components for viewing all client reservations and manage rooms by the manager. A customer can easily select a date, a suitable room, checks pricing, and then submit his request.
+A customer can easily select a date, a suitable room, checks pricing, and then submit his request.
 
-Design:
+***Design:***
 
 The goal of this project is to create a simple website for hotel reservations using the Jakarta EE platform. A number of other technologies like EJB, JSF, and Payara for server applications are used. In addition, I used Bootstrap and CSS to create an aesthetically pleasing website, and since we also needed a database, I used a MYSQL database.
 A web application to book a room in a hotel, a customer must check the application to see if there is an empty room by providing check-in and checkout dates, the duration of the reservation and the overall cost.
 
-Features:
+***Features:***
 
 This website has following features,
+
 Sign Up System
+
 Login System
+
 Manager Panel
+
 Create Rooms
+
 Manage Rooms(View, Edit, Delete)
+
 Client Panel
+
 Hotel Room Booking System
+
 View All Client Reservations (View, Modify and Cancel Reservation)
+
 All Pages are Validated on server-side and client side.
+
 Well designed using bootstrap and CSS
 
-Screen Captures:
+***Screen Captures:***
 
 ![SignUp](https://user-images.githubusercontent.com/113000548/236511940-1c707ce1-5ec9-40c9-91b0-805e565f347a.png)
 
@@ -61,7 +72,7 @@ Hotel, Guest, Room, Booking, Payment are considered as entities in this web appl
 ![Data Model](https://user-images.githubusercontent.com/113000548/223309225-754a2e32-d064-4420-80e1-75889d4df336.png)
 
 
-Rest API End Points:
+***Rest API End Points:***
 
 Get
 ![Get Multiple Records](https://user-images.githubusercontent.com/113000548/236510697-37325b83-711e-456b-ace5-df0f0a4cc858.png)
